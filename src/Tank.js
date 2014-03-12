@@ -4,7 +4,7 @@ var Tank = cc.Sprite.extend( {
 		this._super( );
 		this.initWithFile( 'res/images/plane.png' );
 
-		this.direction = Tank.DIR.UP;
+		this.direction = Tank.DIR.STILL;
 
 		this.x = x;
 		this.y = y;

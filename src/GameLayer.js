@@ -14,7 +14,26 @@ var GameLayer = cc.LayerColor.extend({
 
         this.tank.scheduleUpdate( );
 
+        this.setKeyboardEnabled( true );
+
         return true;
+    },
+
+    onKeyDown: function( e ){
+        switch( e ){
+            case cc.KEY.left:
+                this.tank.setDirection( Tank.DIR.LEFT );
+                break;
+            case cc.KEY.right:
+                this.tank.setDirection( Tank.DIR.RIGHT );
+                break;
+            case cc.KEY.up:
+                this.tank.setDirection( Tank.DIR.UP );
+                break;
+            case cc.KEY.down:
+                this.tank.setDirection( Tank.DIR.DOWN );
+                break;
+        }
     }
 });
 
