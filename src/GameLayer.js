@@ -34,7 +34,11 @@ var GameLayer = cc.LayerColor.extend({
                 this.tank.setNextDirection( Tank.DIR.DOWN );
                 break;
         }
-    }
+    },
+
+    /*onKeyUp: function( e ){
+        this.tank.setNextDirection( Tank.DIR.STILL );
+    }*/
 });
 
 var StartScene = cc.Scene.extend({

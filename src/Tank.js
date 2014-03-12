@@ -46,6 +46,9 @@ var Tank = cc.Sprite.extend( {
 	update: function( dt ){
 
 		if( this.isAtCenter() ){
+			if( !this.isPossibleToMove( this.nextDirection ) ){
+				this.nextDirection = Tank.DIR.STILL;
+			}
 			this.direction = this.nextDirection;
 		}
 
@@ -70,6 +73,28 @@ var Tank = cc.Sprite.extend( {
 
 	isAtCenter: function(){
 		return ( ( this.x + 20 ) % 40 == 0 ) && ( ( this.y + 20 ) % 40 == 0 );
+	},
+
+	isPossibleToMove: function( dir ){
+		if( dir == Tank.DIR.STILL ){
+			return true;
+		}
+		var nextBlockX = ( this.x - 20 ) / 40;
+		var nextBlockY = ( this.y - 20 ) / 40;
+
+		if( dir == Tank.DIR.UP ){
+			nextBlockY += 1;
+		}
+		else if( dir == Tank.DIR.DOWN ){
+			nextBlockY -= 1;
+		}
+		else if( dir == Tank.DIR.LEFT ){
+			nextBlockX -= 1;
+		}
+		else if( dir == Tank.DIR.RIGHT ){
+			nextBlockX += 1;
+		}
+		return !this.maze.isWall( nextBlockX, nextBlockY );
 	}
 
 
