@@ -14,8 +14,8 @@ var Maze = cc.Node.extend( {
 		    '#.#.#..........#.#.#',
 		    '#.#.###.####.###.#.#',
 		    '#.#...#......#...#.#',
-		    '#.###.###..###.###.#',
-			'#..................#',
+		    '#.###.########.###.#',
+			'#.......#*.#.......#',
 			'####################'
 		];
 		
@@ -27,6 +27,12 @@ var Maze = cc.Node.extend( {
 					s.setPosition(  new cc.Point( c * 40, ( this.HEIGHT - r - 1 ) * 40 ) );
 					this.addChild( s );
 					
+				}
+				else if ( this.MAP[r][c] == '*' ){
+					var s = cc.Sprite.create( 'res/images/heart.png' );
+					s.setAnchorPoint( new cc.Point( 0, 0 ) );
+					s.setPosition( new cc.Point( c * 40, ( this.HEIGHT -r - 1 ) * 40 ) );
+					this.addChild( s );
 				}
 				
 			}
