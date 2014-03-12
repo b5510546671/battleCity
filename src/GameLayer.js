@@ -22,16 +22,16 @@ var GameLayer = cc.LayerColor.extend({
     onKeyDown: function( e ){
         switch( e ){
             case cc.KEY.left:
-                this.tank.setDirection( Tank.DIR.LEFT );
+                this.tank.setNextDirection( Tank.DIR.LEFT );
                 break;
             case cc.KEY.right:
-                this.tank.setDirection( Tank.DIR.RIGHT );
+                this.tank.setNextDirection( Tank.DIR.RIGHT );
                 break;
             case cc.KEY.up:
-                this.tank.setDirection( Tank.DIR.UP );
+                this.tank.setNextDirection( Tank.DIR.UP );
                 break;
             case cc.KEY.down:
-                this.tank.setDirection( Tank.DIR.DOWN );
+                this.tank.setNextDirection( Tank.DIR.DOWN );
                 break;
         }
     }

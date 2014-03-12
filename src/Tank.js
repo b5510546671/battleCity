@@ -5,6 +5,7 @@ var Tank = cc.Sprite.extend( {
 		this.initWithFile( 'res/images/plane.png' );
 
 		this.direction = Tank.DIR.STILL;
+		this.nextDirection = Tank.DIR.STILL;
 
 		this.x = x;
 		this.y = y;
@@ -19,11 +20,37 @@ var Tank = cc.Sprite.extend( {
 		this.direction = dir;
 	},
 
+	setNextDirection: function( dir ){
+		this.nextDirection = dir;
+	},
+
 	setMaze: function( maze ){
 		this.maze = maze;
 	},
 
+	checkOverBounds: function( ){
+		if( this.getPositionX() < 0 ){
+			this.x = 800;
+		}
+		else if( this.getPositionX() > 800 ){
+			this.x = 0;
+		}
+		else if( this.getPositionY() < 0 ){
+			this.y = 600;
+		}
+		else if( this.getPositionY() > 600 ){
+			this.y = 0;
+		}
+	},
+
 	update: function( dt ){
+
+		if( this.isAtCenter() ){
+			this.direction = this.nextDirection;
+		}
+
+		this.checkOverBounds();
+
 		switch( this.direction ){
 			case Tank.DIR.UP:
 				this.y += Tank.MOVE_STEP;
@@ -39,6 +66,10 @@ var Tank = cc.Sprite.extend( {
 				break;
 		}
 		this.updatePosition();
+	},
+
+	isAtCenter: function(){
+		return ( ( this.x + 20 ) % 40 == 0 ) && ( ( this.y + 20 ) % 40 == 0 );
 	}
 
 
