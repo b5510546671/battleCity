@@ -7,11 +7,12 @@ var GameLayer = cc.LayerColor.extend({
         this.maze.setPosition( new cc.Point (0, 40) );
         this.addChild( this.maze );
 
-        this.tank = new Tank( new cc.Point( 10, 10 ) );
+        this.tank = new Tank( 10*40 + 20, 6*40 + 20 );
         this.maze.addChild( this.tank );
         
         this.tank.setMaze( this.maze );
 
+        this.tank.scheduleUpdate( );
 
         return true;
     }

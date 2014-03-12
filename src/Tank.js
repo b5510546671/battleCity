@@ -1,7 +1,10 @@
 var Tank = cc.Sprite.extend( {
+
 	ctor: function( x, y ){
 		this._super( );
 		this.initWithFile( 'res/images/plane.png' );
+
+		this.direction = Tank.DIR.UP;
 
 		this.x = x;
 		this.y = y;
@@ -18,6 +21,24 @@ var Tank = cc.Sprite.extend( {
 
 	setMaze: function( maze ){
 		this.maze = maze;
+	},
+
+	update: function( dt ){
+		switch( this.direction ){
+			case Tank.DIR.UP:
+				this.y += Tank.MOVE_STEP;
+				break;
+			case Tank.DIR.DOWN:
+				this.y -= Tank.MOVE_STEP;
+				break;
+			case Tank.DIR.RIGHT:
+				this.x += Tank.MOVE_STEP;
+				break;
+			case Tank.DIR.LEFT:
+				this.x -= Tank.MOVE_STEP;
+				break;
+		}
+		this.updatePosition();
 	}
 
 
