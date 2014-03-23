@@ -29,7 +29,8 @@ var Maze = cc.Node.extend( {
 					
 				}
 				else if ( this.MAP[r][c] == '*' ){
-					var s = cc.Sprite.create( 'res/images/heart.png' );
+					//var s = cc.Sprite.create( 'res/images/heart.png' );
+					var s = new Heart();
 					s.setAnchorPoint( new cc.Point( 0, 0 ) );
 					s.setPosition( new cc.Point( c * 40, ( this.HEIGHT -r - 1 ) * 40 ) );
 					this.addChild( s );
@@ -38,6 +39,7 @@ var Maze = cc.Node.extend( {
 			}
 		}
 	},
+
 	isWall: function( blockX, blockY ){
 		var r = this.HEIGHT - blockY - 1;
 		var c = blockX;
