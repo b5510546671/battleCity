@@ -23,15 +23,19 @@ var GameLayer = cc.LayerColor.extend({
         switch( e ){
             case cc.KEY.left:
                 this.tank.setNextDirection( Tank.DIR.LEFT );
+                this.tank.setPicture( Tank.DIR.LEFT );
                 break;
             case cc.KEY.right:
                 this.tank.setNextDirection( Tank.DIR.RIGHT );
+                this.tank.setPicture( Tank.DIR.RIGHT );
                 break;
             case cc.KEY.up:
                 this.tank.setNextDirection( Tank.DIR.UP );
+                this.tank.setPicture( Tank.DIR.UP );
                 break;
             case cc.KEY.down:
                 this.tank.setNextDirection( Tank.DIR.DOWN );
+                this.tank.setPicture( Tank.DIR.DOWN );
                 break;
         }
     },

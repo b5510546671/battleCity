@@ -12,6 +12,23 @@ var Tank = cc.Sprite.extend( {
 		this.updatePosition( );
 	},
 
+	setPicture: function( dir ){
+		switch( dir ){
+			case Tank.DIR.UP:
+				this.initWithFile( 'res/images/plane.png' );
+				break;
+			case Tank.DIR.DOWN:
+				this.initWithFile( 'res/images/plane_down.png' );
+				break;
+			case Tank.DIR.LEFT:
+				this.initWithFile( 'res/images/plane_left.png' );
+				break;
+			case Tank.DIR.RIGHT:
+				this.initWithFile( 'res/images/plane_right.png' );
+				break;
+		}
+	},
+
 	updatePosition: function( ){
 		this.setPosition( new cc.Point( this.x, this.y ) );
 	},
@@ -70,6 +87,7 @@ var Tank = cc.Sprite.extend( {
 		}
 		this.updatePosition();
 	},
+
 
 	isAtCenter: function(){
 		return ( ( this.x + 20 ) % 40 == 0 ) && ( ( this.y + 20 ) % 40 == 0 );
