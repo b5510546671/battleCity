@@ -7,6 +7,8 @@ var Tank = cc.Sprite.extend( {
 		this.direction = Tank.DIR.STILL;
 		this.nextDirection = Tank.DIR.STILL;
 
+		this.pointingDirection = Tank.DIR.UP;
+
 		this.x = x;
 		this.y = y;
 		this.updatePosition( );
@@ -35,6 +37,7 @@ var Tank = cc.Sprite.extend( {
 
 	setDirection: function( dir ){
 		this.direction = dir;
+		this.pointingDirection = dir;
 	},
 
 	setNextDirection: function( dir ){
@@ -46,30 +49,35 @@ var Tank = cc.Sprite.extend( {
 	},
 
 	checkOverBounds: function( ){
-		if( this.getPositionX() < 0 ){
+		if( this.getPositionX( ) < 0 ){
 			this.x = 800;
 		}
-		else if( this.getPositionX() > 800 ){
+		else if( this.getPositionX( ) > 800 ){
 			this.x = 0;
 		}
-		else if( this.getPositionY() < 0 ){
+		else if( this.getPositionY( ) < 0 ){
 			this.y = 600;
 		}
-		else if( this.getPositionY() > 600 ){
+		else if( this.getPositionY( ) > 600 ){
 			this.y = 0;
 		}
 	},
 
 	update: function( dt ){
 
-		if( this.isAtCenter() ){
+		if( this.isAtCenter( ) ){
 			if( !this.isPossibleToMove( this.nextDirection ) ){
 				this.nextDirection = Tank.DIR.STILL;
 			}
+
 			this.direction = this.nextDirection;
+			
+			if( this.nextDirection != Tank.DIR.STILL ){
+				this.pointingDirection = this.nextDirection;
+			}
 		}
 
-		this.checkOverBounds();
+		this.checkOverBounds( );
 
 		switch( this.direction ){
 			case Tank.DIR.UP:
@@ -85,11 +93,11 @@ var Tank = cc.Sprite.extend( {
 				this.x -= Tank.MOVE_STEP;
 				break;
 		}
-		this.updatePosition();
+		this.updatePosition( );
 	},
 
 
-	isAtCenter: function(){
+	isAtCenter: function( ){
 		return ( ( this.x + 20 ) % 40 == 0 ) && ( ( this.y + 20 ) % 40 == 0 );
 	},
 
@@ -113,6 +121,12 @@ var Tank = cc.Sprite.extend( {
 			nextBlockX += 1;
 		}
 		return !this.maze.isWall( nextBlockX, nextBlockY );
+	},
+
+	shoot: function(){
+
+		var bullet = new Bullet( this.x, this.y, this.pointingDirection );
+		bullet.scheduleUpdate();
 	}
 
 

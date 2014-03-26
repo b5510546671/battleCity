@@ -37,6 +37,9 @@ var GameLayer = cc.LayerColor.extend({
                 this.tank.setNextDirection( Tank.DIR.DOWN );
                 this.tank.setPicture( Tank.DIR.DOWN );
                 break;
+            case cc.KEY.space:
+                this.tank.shoot();
+                break;
         }
     },
 

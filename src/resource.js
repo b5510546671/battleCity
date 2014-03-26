@@ -6,6 +6,10 @@ var g_resources = [
 	{src: 'images/heart_01.png'},
 	{src: 'images/plane_down.png'},
 	{src: 'images/plane_left.png'},
-	{src: 'images/plane_right.png'}
+	{src: 'images/plane_right.png'},
+	{src: 'images/bullet_up.png'},
+	{src: 'images/bullet_down.png'},
+	{src: 'images/bullet_right.png'},
+	{src: 'images/bullet_left.png'}
 
 ];
