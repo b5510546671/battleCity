@@ -14,6 +14,8 @@ var GameLayer = cc.LayerColor.extend({
 
         this.tank.scheduleUpdate( );
 
+        
+
         this.setKeyboardEnabled( true );
 
         return true;
@@ -42,6 +44,8 @@ var GameLayer = cc.LayerColor.extend({
                 break;
         }
     },
+
+    
 
     /*onKeyUp: function( e ){
         this.tank.setNextDirection( Tank.DIR.STILL );

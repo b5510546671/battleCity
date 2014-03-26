@@ -126,6 +126,7 @@ var Tank = cc.Sprite.extend( {
 	shoot: function(){
 
 		var bullet = new Bullet( this.x, this.y, this.pointingDirection );
+
 		bullet.scheduleUpdate();
 	}
 
