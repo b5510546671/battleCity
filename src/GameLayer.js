@@ -7,7 +7,7 @@ var GameLayer = cc.LayerColor.extend({
         this.maze.setPosition( new cc.Point (0, 40) );
         this.addChild( this.maze );
 
-        this.tank = new Tank( 10*40 + 20, 6*40 + 20 );
+        this.tank = new Tank( 10*40 + 20, 6*40 + 20, this );
         this.maze.addChild( this.tank );
         
         this.tank.setMaze( this.maze );
@@ -45,11 +45,18 @@ var GameLayer = cc.LayerColor.extend({
         }
     },
 
+    shoot: function( x, y, pointingDirection ){
+        console.log('shoot in GameLayer is done');
+        var bullet = new Bullet( x, y, pointingDirection );
+        this.addChild( bullet );
+        bullet.scheduleUpdate( );
+    },
+
     
 
-    /*onKeyUp: function( e ){
+   /* onKeyUp: function( e ){
         this.tank.setNextDirection( Tank.DIR.STILL );
-    }*/
+    } */
 });
 
 var StartScene = cc.Scene.extend({

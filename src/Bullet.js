@@ -4,10 +4,10 @@ var Bullet = cc.Sprite.extend( {
 		this._super( );
 		
 		this.x = x;
-		this.y = y;
+		this.y = y + 40;
 		this.pointingDirection = dir;
 		
-		this.planeBullet = this.createBullet( this.pointingDirection );
+		this.createBullet( this.pointingDirection );
 
 		//this.createBullet( this.pointingDirection );
 
@@ -18,23 +18,23 @@ var Bullet = cc.Sprite.extend( {
 
 	createBullet: function( dir ){
 		console.log(this.pointingDirection);
-
+		console.log( this.x + " , " + this.y );
 		switch( dir ){
 			case Tank.DIR.UP:
 				console.log('shooting up');
-				return cc.Sprite.create( 'res/images/bullet_up.png' );
+				this.initWithFile( 'res/images/bullet_up.png' );
 				break;
 			case Tank.DIR.DOWN:
 				console.log('shooting down');
-				return cc.Sprite.create( 'res/images/bullet_down.png' );
+				this.initWithFile( 'res/images/bullet_down.png' );
 				break;
 			case Tank.DIR.LEFT:
 				console.log('shooting left');
-				return cc.Sprite.create( 'res/images/bullet_left.png' );
+				this.initWithFile( 'res/images/bullet_left.png' );
 				break;
 			case Tank.DIR.RIGHT:
 				console.log('shooting right');
-				return cc.Sprite.create( 'res/images/bullet_right.png' );
+				this.initWithFile( 'res/images/bullet_right.png' );
 				break;
 			default:
 				console.log('nothing is create');
@@ -82,7 +82,7 @@ var Bullet = cc.Sprite.extend( {
 				this.x -= Bullet.MOVE_STEP;
 				break;
 		}
-		console.log('update is done' );
+		//console.log('update is done' );
 		this.updateBullet( );
 	}
 

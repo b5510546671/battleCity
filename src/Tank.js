@@ -1,6 +1,6 @@
 var Tank = cc.Sprite.extend( {
 
-	ctor: function( x, y ){
+	ctor: function( x, y, gameLayer ){
 		this._super( );
 		this.initWithFile( 'res/images/plane.png' );
 
@@ -11,6 +11,7 @@ var Tank = cc.Sprite.extend( {
 
 		this.x = x;
 		this.y = y;
+		this.gameLayer = gameLayer;
 		this.updatePosition( );
 	},
 
@@ -124,10 +125,8 @@ var Tank = cc.Sprite.extend( {
 	},
 
 	shoot: function(){
-
-		var bullet = new Bullet( this.x, this.y, this.pointingDirection );
-
-		bullet.scheduleUpdate();
+		console.log( "FOR TANK " + this.x + " , " + this.y );
+		this.gameLayer.shoot( this.x, this.y, this.pointingDirection );
 	}
 
 
