@@ -1,19 +1,14 @@
 var Bullet = cc.Sprite.extend( {
-	ctor: function( x, y, dir ){
+	ctor: function( x, y, dir, maze ){
 
 		this._super( );
 		
 		this.x = x;
 		this.y = y + 40;
 		this.pointingDirection = dir;
-		
+		this.maze = maze;
 		this.createBullet( this.pointingDirection );
-
-		//this.createBullet( this.pointingDirection );
-
-
 		this.update();
-		//this.updateBullet( );
 	},
 
 	createBullet: function( dir ){
@@ -41,33 +36,21 @@ var Bullet = cc.Sprite.extend( {
 				break;
 		}
 
-
-		/*
-		if( this.pointingDirection == Tank.DIR.UP ){
-			return cc.Sprite.create( 'res/images/bullet_up.png' );
-		}
-		else if( this.pointingDirection == Tank.DIR.DOWN ){
-			return cc.Sprite.create( 'res/images/bullet_down.png' );
-		}
-		else if( this.pointingDirection == Tank.DIR.LEFT ){
-			return cc.Sprite.create( 'res/images/bullet_left.png' );
-		}
-		else if( this.pointingDirection == Tank.DIR.RIGHT ){
-			return cc.Sprite.create( 'res/images/bullet_right.png' );
-		}
-		else{
-			console.log('nothing is create');
-		}
-		*/
 	},
 
 	updateBullet: function( ){
-		//console.log('this.tank.shoot()');
 		this.setPosition( new cc.Point( this.x, this.y ) );
 	},
 
+	isAtCenter: function( ){
+		return ( ( this.x + 20 ) % 40 == 0 ) && ( ( this.y + 20 ) % 40 == 0 );
+	},
+
 	update: function( dt ){
-		//console.log('this.tank.shoot()');
+		if( this.isAtCenter( ) ){
+			this.checkShootHeart( );
+			this.checkShootBreakableWall( );
+		}
 		switch( this.pointingDirection ){
 			case Tank.DIR.UP:
 				this.y += Bullet.MOVE_STEP;
@@ -82,9 +65,36 @@ var Bullet = cc.Sprite.extend( {
 				this.x -= Bullet.MOVE_STEP;
 				break;
 		}
-		//console.log('update is done' );
 		this.updateBullet( );
+	},
+
+	checkShootBreakableWall: function(){
+		var xPosit = ( this.x - 20 ) / 40;
+		var yPosit = ( this.y - 20 ) / 40;
+
+		var breakableWall = this.maze.getBreakableWall( xPosit, yPosit );
+
+		if( breakableWall ){
+			console.log( '#######################shoot at wall#########################' );
+		}
+	},
+
+	checkShootHeart: function( ){
+
+		var xPosit = ( this.x - 20 ) / 40;
+		var yPosit = ( this.y - 20 ) / 40;
+
+		console.log( 'xPosit is ' + xPosit + ' yPosit is ' + yPosit );
+
+		var heart = this.maze.getHeart( xPosit, yPosit );
+		console.log( heart );
+		if( heart ){
+			console.log( '==============================GAME OVER!==================================' );
+		}
+		
 	}
+
+
 
 
 } );

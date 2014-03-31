@@ -51,11 +51,30 @@ var Maze = cc.Node.extend( {
 		var r = this.HEIGHT - blockY - 1;
 		var c = blockX;
 		console.log('r = ' + r + ' c = ' + c);
-		if( 0 <= r && r <= 12 ){
+		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
 			return ( ( this.MAP[ r ][ c ] == '#' ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
 		}
 		else{
 			return true;
+		}
+	},
+
+	getHeart: function( xPosit, yPosit ){
+
+		var r = this.HEIGHT - yPosit - 1;
+		var c = xPosit;
+		console.log( 'r in getHeart is ' + r + ' c in getHeart is ' + c );
+		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
+			return ( this.MAP[ r ][ c ] == '*' );
+		}
+	},
+
+	getBreakableWall: function( xPosit, yPosit ){
+		var r = this.HEIGHT - yPosit - 1;
+		var c = xPosit;
+
+		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
+			return ( this.MAP[ r ][ c ] == '#' );
 		}
 	}
 
