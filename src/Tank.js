@@ -19,15 +19,19 @@ var Tank = cc.Sprite.extend( {
 		switch( dir ){
 			case Tank.DIR.UP:
 				this.initWithFile( 'res/images/plane.png' );
+				this.pointingDirection = Tank.DIR.UP;
 				break;
 			case Tank.DIR.DOWN:
 				this.initWithFile( 'res/images/plane_down.png' );
+				this.pointingDirection = Tank.DIR.DOWN;
 				break;
 			case Tank.DIR.LEFT:
 				this.initWithFile( 'res/images/plane_left.png' );
+				this.pointingDirection = Tank.DIR.LEFT;
 				break;
 			case Tank.DIR.RIGHT:
 				this.initWithFile( 'res/images/plane_right.png' );
+				this.pointingDirection = Tank.DIR.RIGHT;
 				break;
 		}
 	},
@@ -38,7 +42,7 @@ var Tank = cc.Sprite.extend( {
 
 	setDirection: function( dir ){
 		this.direction = dir;
-		this.pointingDirection = dir;
+		//this.pointingDirection = dir;
 	},
 
 	setNextDirection: function( dir ){
@@ -74,7 +78,7 @@ var Tank = cc.Sprite.extend( {
 			this.direction = this.nextDirection;
 			
 			if( this.nextDirection != Tank.DIR.STILL ){
-				this.pointingDirection = this.nextDirection;
+				//this.pointingDirection = this.nextDirection;
 			}
 		}
 
