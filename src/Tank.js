@@ -42,7 +42,7 @@ var Tank = cc.Sprite.extend( {
 
 	setDirection: function( dir ){
 		this.direction = dir;
-		//this.pointingDirection = dir;
+		
 	},
 
 	setNextDirection: function( dir ){

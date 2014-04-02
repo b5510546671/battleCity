@@ -8,6 +8,7 @@ var Bullet = cc.Sprite.extend( {
 		this.pointingDirection = dir;
 		this.maze = maze;
 		this.createBullet( this.pointingDirection );
+      
 		this.update();
 	},
 
