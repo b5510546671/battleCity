@@ -46,7 +46,7 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     shoot: function( x, y, pointingDirection ){
-        console.log('shoot in GameLayer is done');
+        //console.log('shoot in GameLayer is done');
         var bullet = new Bullet( x, y, pointingDirection, this.maze );
        
         this.addChild( bullet );

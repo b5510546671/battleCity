@@ -129,7 +129,7 @@ var Tank = cc.Sprite.extend( {
 	},
 
 	shoot: function(){
-		console.log( "FOR TANK " + this.x + " , " + this.y );
+		//console.log( "FOR TANK " + this.x + " , " + this.y );
 		this.gameLayer.shoot( this.x, this.y, this.pointingDirection );
 	}
 

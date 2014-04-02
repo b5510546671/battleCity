@@ -12,27 +12,27 @@ var Bullet = cc.Sprite.extend( {
 	},
 
 	createBullet: function( dir ){
-		console.log(this.pointingDirection);
-		console.log( this.x + " , " + this.y );
+		//console.log(this.pointingDirection);
+		//console.log( this.x + " , " + this.y );
 		switch( dir ){
 			case Tank.DIR.UP:
-				console.log('shooting up');
+				//console.log('shooting up');
 				this.initWithFile( 'res/images/bullet_up.png' );
 				break;
 			case Tank.DIR.DOWN:
-				console.log('shooting down');
+				//console.log('shooting down');
 				this.initWithFile( 'res/images/bullet_down.png' );
 				break;
 			case Tank.DIR.LEFT:
-				console.log('shooting left');
+				//console.log('shooting left');
 				this.initWithFile( 'res/images/bullet_left.png' );
 				break;
 			case Tank.DIR.RIGHT:
-				console.log('shooting right');
+				//console.log('shooting right');
 				this.initWithFile( 'res/images/bullet_right.png' );
 				break;
 			default:
-				console.log('nothing is create');
+				//console.log('nothing is create');
 				break;
 		}
 
@@ -84,10 +84,10 @@ var Bullet = cc.Sprite.extend( {
 		var xPosit = ( this.x - 20 ) / 40;
 		var yPosit = ( this.y - 20 ) / 40;
 
-		console.log( 'xPosit is ' + xPosit + ' yPosit is ' + yPosit );
+		//console.log( 'xPosit is ' + xPosit + ' yPosit is ' + yPosit );
 
 		var heart = this.maze.getHeart( xPosit, yPosit );
-		console.log( heart );
+		//console.log( heart );
 		if( heart ){
 			console.log( '==============================GAME OVER!==================================' );
 		}

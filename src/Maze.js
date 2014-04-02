@@ -50,7 +50,7 @@ var Maze = cc.Node.extend( {
 	isWall: function( blockX, blockY ){
 		var r = this.HEIGHT - blockY - 1;
 		var c = blockX;
-		console.log('r = ' + r + ' c = ' + c);
+		//console.log('r = ' + r + ' c = ' + c);
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
 			return ( ( this.MAP[ r ][ c ] == '#' ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
 		}
@@ -63,7 +63,7 @@ var Maze = cc.Node.extend( {
 
 		var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
-		console.log( 'r in getHeart is ' + r + ' c in getHeart is ' + c );
+		//console.log( 'r in getHeart is ' + r + ' c in getHeart is ' + c );
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
 			return ( this.MAP[ r ][ c ] == '*' );
 		}
