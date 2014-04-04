@@ -11,6 +11,9 @@ var g_resources = [
 	{src: 'images/bullet_down.png'},
 	{src: 'images/bullet_right.png'},
 	{src: 'images/bullet_left.png'},
-	{src: 'images/static_wall.png'}
-
+	{src: 'images/static_wall.png'},
+	{src: 'images/bot_plane.png'},
+	{src: 'images/bot_plane_down.png'},
+	{src: 'images/bot_plane_left.png'},
+	{src: 'images/bot_plane_right.png'}
 ];

@@ -59,9 +59,9 @@ var GameLayer = cc.LayerColor.extend({
 
     
 
-   /* onKeyUp: function( e ){
+    /*onKeyUp: function( e ){
         this.tank.setNextDirection( Tank.DIR.STILL );
-    } */
+    }*/ 
 });
 
 var StartScene = cc.Scene.extend({

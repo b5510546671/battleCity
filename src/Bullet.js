@@ -49,6 +49,9 @@ var Bullet = cc.Sprite.extend( {
 
 	update: function( dt ){
 		if( this.isAtCenter( ) ){
+			if( !this.isPossibleToMove(  ) ){
+				
+			}
 			this.checkShootHeart( );
 			this.checkShootBreakableWall( );
 		}
@@ -93,7 +96,29 @@ var Bullet = cc.Sprite.extend( {
 			console.log( '==============================GAME OVER!==================================' );
 		}
 		
-	}
+	},
+
+	isPossibleToMove: function( dir ){
+		if( dir == Tank.DIR.STILL ){
+			return true;
+		}
+		var nextBlockX = ( this.x - 20 ) / 40;
+		var nextBlockY = ( this.y - 20 ) / 40;
+
+		if( dir == Tank.DIR.UP ){
+			nextBlockY += 1;
+		}
+		else if( dir == Tank.DIR.DOWN ){
+			nextBlockY -= 1;
+		}
+		else if( dir == Tank.DIR.LEFT ){
+			nextBlockX -= 1;
+		}
+		else if( dir == Tank.DIR.RIGHT ){
+			nextBlockX += 1;
+		}
+		return !this.maze.isWall( nextBlockX, nextBlockY );
+	},
 
 
 
