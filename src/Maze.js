@@ -76,6 +76,15 @@ var Maze = cc.Node.extend( {
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
 			return ( this.MAP[ r ][ c ] == '#' );
 		}
+	},
+
+	getStaticWall: function( xPosit, yPosit ){
+		var r = this.HEIGHT - yPosit - 1;
+		var c = xPosit;
+
+		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
+			return ( this.MAP[ r ][ c ] == '+' );
+		}
 	}
 
 } );

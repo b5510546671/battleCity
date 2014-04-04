@@ -1,5 +1,5 @@
 var Bullet = cc.Sprite.extend( {
-	ctor: function( x, y, dir, maze ){
+	ctor: function( x, y, dir, maze, gameLayer ){
 
 		this._super( );
 		
@@ -8,6 +8,8 @@ var Bullet = cc.Sprite.extend( {
 		this.pointingDirection = dir;
 		this.maze = maze;
 		this.createBullet( this.pointingDirection );
+
+		this.gameLayer = gameLayer;
       
 		this.update();
 	},
@@ -49,12 +51,19 @@ var Bullet = cc.Sprite.extend( {
 
 	update: function( dt ){
 		if( this.isAtCenter( ) ){
-			if( !this.isPossibleToMove(  ) ){
-				
+			if( !this.isPossibleToMove( this.pointingDirection ) ){
+				//REMOVE THAT BULLET FROM SCREEN
+				this.gameLayer.removeChild( this );
+				console.log( 'bullet will be removed from this screen ' );
 			}
-			this.checkShootHeart( );
-			this.checkShootBreakableWall( );
+
+			var xPosit = ( this.x - 20 ) / 40;
+			var yPosit = ( this.y - 20 ) / 40;
+
+			//this.checkShootHeart( xPosit, yPosit );
+			//this.checkShootBreakableWall( xPosit, yPosit );
 		}
+
 		switch( this.pointingDirection ){
 			case Tank.DIR.UP:
 				this.y += Bullet.MOVE_STEP;
@@ -69,39 +78,47 @@ var Bullet = cc.Sprite.extend( {
 				this.x -= Bullet.MOVE_STEP;
 				break;
 		}
+
 		this.updateBullet( );
 	},
 
-	checkShootBreakableWall: function(){
-		var xPosit = ( this.x - 20 ) / 40;
-		var yPosit = ( this.y - 20 ) / 40;
-
+	checkShootBreakableWall: function( xPosit, yPosit ){
+		
 		var breakableWall = this.maze.getBreakableWall( xPosit, yPosit );
 
 		if( breakableWall ){
+			//this.gameLayer.removeChild( this );
 			console.log( '#######################shoot at wall#########################' );
+			return true;
 		}
 	},
 
-	checkShootHeart: function( ){
+	checkShootHeart: function( xPosit, yPosit ){
 
-		var xPosit = ( this.x - 20 ) / 40;
-		var yPosit = ( this.y - 20 ) / 40;
-
+		
 		//console.log( 'xPosit is ' + xPosit + ' yPosit is ' + yPosit );
 
 		var heart = this.maze.getHeart( xPosit, yPosit );
 		//console.log( heart );
 		if( heart ){
+
 			console.log( '==============================GAME OVER!==================================' );
+			return true;
 		}
 		
 	},
 
-	isPossibleToMove: function( dir ){
-		if( dir == Tank.DIR.STILL ){
+	checkShootStaticWall: function( xPosit, yPosit ){
+		var staticWall = this.maze.getStaticWall( xPosit, yPosit );
+
+		if( staticWall ){
+			//this.gameLayer.removeChild( this );
 			return true;
 		}
+	},
+
+	isPossibleToMove: function( dir ){
+		
 		var nextBlockX = ( this.x - 20 ) / 40;
 		var nextBlockY = ( this.y - 20 ) / 40;
 
@@ -117,7 +134,8 @@ var Bullet = cc.Sprite.extend( {
 		else if( dir == Tank.DIR.RIGHT ){
 			nextBlockX += 1;
 		}
-		return !this.maze.isWall( nextBlockX, nextBlockY );
+		return !( this.checkShootBreakableWall( nextBlockX, nextBlockY ) || this.checkShootHeart( nextBlockX, nextBlockY ) || this.checkShootStaticWall( nextBlockX, nextBlockY ) );
+		//return !this.maze.isWall( nextBlockX, nextBlockY );
 	},
 
 

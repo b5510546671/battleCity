@@ -47,10 +47,10 @@ var GameLayer = cc.LayerColor.extend({
 
     shoot: function( x, y, pointingDirection ){
         //console.log('shoot in GameLayer is done');
-        var bullet = new Bullet( x, y, pointingDirection, this.maze );
-        this.scheduleOnce(function(){
-            console.log( 'removeChild is called' );
-            this.removeChild( bullet  );
+        var bullet = new Bullet( x, y, pointingDirection, this.maze, this );
+        this.scheduleOnce( function( ){
+            //console.log( 'removeChild is called' );
+            this.removeChild( bullet );
         }, 2 );
        
         this.addChild( bullet );
@@ -59,9 +59,9 @@ var GameLayer = cc.LayerColor.extend({
 
     
 
-    /*onKeyUp: function( e ){
+    onKeyUp: function( e ){
         this.tank.setNextDirection( Tank.DIR.STILL );
-    }*/ 
+    }
 });
 
 var StartScene = cc.Scene.extend({
