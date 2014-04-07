@@ -1,5 +1,5 @@
 var GameLayer = cc.LayerColor.extend({
-    init: function() {
+    init: function( ) {
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
 
@@ -11,14 +11,30 @@ var GameLayer = cc.LayerColor.extend({
         this.maze.addChild( this.tank );
         
         this.tank.setMaze( this.maze );
-
-
-
+        
         this.tank.scheduleUpdate( );
 
         this.setKeyboardEnabled( true );
 
+        this.count = 60;
+        this.timeLabel = cc.LabelTTF.create( '60', 'Arial', 32 );
+        this.timeLabel.setPosition( new cc.Point( 100, 14 * 40 + 15 ) );
+        this.addChild( this.timeLabel );
+        
+        this.schedule( function( ){
+            if( this.count == 1 ){
+                this.gameOver( );
+            }
+            this.count -= 1;
+            this.timeLabel.setString( this.count );
+        }, 1 );
+
         return true;
+    },
+
+    countdown: function( ){
+        this.timeLabel -= 1;
+        this.timeLabel.setString( this.timeLabel );
     },
 
     onKeyDown: function( e ){
@@ -57,9 +73,10 @@ var GameLayer = cc.LayerColor.extend({
         bullet.scheduleUpdate( );
     },
 
-    gameOver: function(){
+    gameOver: function( ){
         var gameOver = new GameOverLayer( );
         this.setKeyboardEnabled( false );
+        this.getScheduler( ).unscheduleAllCallbacks( );
         this.addChild( gameOver );
     },
     
@@ -69,10 +86,10 @@ var GameLayer = cc.LayerColor.extend({
 });
 
 var StartScene = cc.Scene.extend({
-    onEnter: function() {
-        this._super();
-        var layer = new GameLayer();
-        layer.init();
+    onEnter: function( ) {
+        this._super( );
+        var layer = new GameLayer( );
+        layer.init( );
         this.addChild( layer );
     }
 });
