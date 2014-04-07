@@ -3,7 +3,7 @@ var Maze = cc.Node.extend( {
 		this._super( );
 		this.WIDTH = 20;
 		this.HEIGHT = 13;
-		this.MAP = [
+		/*this.MAP = [
 			'#........++........#',
 			'#######......#######',
 		    '#.###.###..###.###.#',
@@ -17,6 +17,22 @@ var Maze = cc.Node.extend( {
 		    '#.###.##..+.##.###.#',
 		    '....###..++#..#.....',
 			'#.+.....#*.#.......#'
+			
+		];*/
+		this.MAP = [
+			'#........++........#',
+			'....................',
+		    '....................',
+	        '#.#...#......#...#.#',
+	        '....................',
+		    '#.#.#..........#.#.#',
+		    '......*.............',
+		    '#.#.#..........#.#.#',
+		    '....................',
+		    '#.#...#..+...#...#.#',
+		    '....................',
+		    '....###....#..#.....',
+			'#.+.....#..#.......#'
 			
 		];
 		
@@ -36,10 +52,9 @@ var Maze = cc.Node.extend( {
 					this.addChild( s );
 				}
 				else if ( this.MAP[ r ][ c ] == '*' ){
-					//var s = cc.Sprite.create( 'res/images/heart.png' );
-					var s = new Heart();
+					var s = new Heart( );
 					s.setAnchorPoint( new cc.Point( 0, 0 ) );
-					s.setPosition( new cc.Point( c * 40, ( this.HEIGHT -r - 1 ) * 40 ) );
+					s.setPosition( new cc.Point( c * 40, ( this.HEIGHT - r - 1 ) * 40 ) );
 					this.addChild( s );
 				}
 				

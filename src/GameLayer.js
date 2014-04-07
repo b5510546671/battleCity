@@ -57,8 +57,12 @@ var GameLayer = cc.LayerColor.extend({
         bullet.scheduleUpdate( );
     },
 
+    gameOver: function(){
+        var gameOver = new GameOverLayer( );
+        this.setKeyboardEnabled( false );
+        this.addChild( gameOver );
+    },
     
-
     onKeyUp: function( e ){
         this.tank.setNextDirection( Tank.DIR.STILL );
     }

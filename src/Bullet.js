@@ -88,6 +88,7 @@ var Bullet = cc.Sprite.extend( {
 
 		if( breakableWall ){
 			//this.gameLayer.removeChild( this );
+			console.log("xPosit " + xPosit + " , yPosit " + yPosit);
 			console.log( '#######################shoot at wall#########################' );
 			return true;
 		}
@@ -101,8 +102,10 @@ var Bullet = cc.Sprite.extend( {
 		var heart = this.maze.getHeart( xPosit, yPosit );
 		//console.log( heart );
 		if( heart ){
-
+			console.log("xPosit " + xPosit + " , yPosit " + yPosit);
 			console.log( '==============================GAME OVER!==================================' );
+
+			this.gameLayer.gameOver( );
 			return true;
 		}
 		
@@ -112,6 +115,8 @@ var Bullet = cc.Sprite.extend( {
 		var staticWall = this.maze.getStaticWall( xPosit, yPosit );
 
 		if( staticWall ){
+			console.log("xPosit " + xPosit + " , yPosit " + yPosit);
+			console.log( '#######################shoot at static wall#########################' );
 			//this.gameLayer.removeChild( this );
 			return true;
 		}
@@ -120,9 +125,9 @@ var Bullet = cc.Sprite.extend( {
 	isPossibleToMove: function( dir ){
 		
 		var nextBlockX = ( this.x - 20 ) / 40;
-		var nextBlockY = ( this.y - 20 ) / 40;
+		var nextBlockY = ( this.y - 40 - 20 ) / 40;
 
-		if( dir == Tank.DIR.UP ){
+/*		if( dir == Tank.DIR.UP ){
 			nextBlockY += 1;
 		}
 		else if( dir == Tank.DIR.DOWN ){
@@ -134,6 +139,7 @@ var Bullet = cc.Sprite.extend( {
 		else if( dir == Tank.DIR.RIGHT ){
 			nextBlockX += 1;
 		}
+*/		
 		return !( this.checkShootBreakableWall( nextBlockX, nextBlockY ) || this.checkShootHeart( nextBlockX, nextBlockY ) || this.checkShootStaticWall( nextBlockX, nextBlockY ) );
 		//return !this.maze.isWall( nextBlockX, nextBlockY );
 	},
