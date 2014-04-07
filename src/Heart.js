@@ -7,7 +7,6 @@ var Heart = cc.Sprite.extend( {
 	},
 
 	heartBlinking: function( ){
-		console.log('this is done');
 		var animation = new cc.Animation.create();
 		animation.addSpriteFrameWithFile( 'res/images/heart.png' );
 		animation.addSpriteFrameWithFile( 'res/images/heart_01.png' );
