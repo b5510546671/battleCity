@@ -8,12 +8,18 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( this.maze );
 
         this.tank = new Tank( 10*40 + 20, 6*40 + 20, this );
+        this.tank.setMaze( this.maze );
+        this.tank.scheduleUpdate( );
         this.maze.addChild( this.tank );
         
-        this.tank.setMaze( this.maze );
+        ////
+        this.btank = new BotTank( 9*40 + 20, 9*40 + 20, this );
+        this.btank.setMaze( this.maze );
+        //this.btank.setNextDirection(BotTank.DIR.UP);
+        this.btank.scheduleUpdate( );
+        this.maze.addChild( this.btank );
+        ////
         
-        this.tank.scheduleUpdate( );
-
         this.setKeyboardEnabled( true );
 
         this.count = 60;
@@ -60,6 +66,10 @@ var GameLayer = cc.LayerColor.extend({
                 break;
         }
     },
+    
+    onKeyUp: function( e ){
+        this.tank.setNextDirection( Tank.DIR.STILL );
+    },
 
     shoot: function( x, y, pointingDirection ){
         //console.log('shoot in GameLayer is done');
@@ -79,10 +89,6 @@ var GameLayer = cc.LayerColor.extend({
         this.getScheduler( ).unscheduleAllCallbacks( );
         this.addChild( gameOver );
     },
-    
-    onKeyUp: function( e ){
-        this.tank.setNextDirection( Tank.DIR.STILL );
-    }
 });
 
 var StartScene = cc.Scene.extend({

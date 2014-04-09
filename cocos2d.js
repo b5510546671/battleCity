@@ -12,6 +12,7 @@
         engineDir: '../../cocos2d/',
         //SingleEngineFile:'',
         appFiles:[
+            'src/BotTank.js',
 			'src/GameOverLayer.js',
 			'src/Bullet.js',
 			'src/Heart.js',

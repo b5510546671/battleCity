@@ -3,7 +3,7 @@ var Maze = cc.Node.extend( {
 		this._super( );
 		this.WIDTH = 20;
 		this.HEIGHT = 13;
-		this.MAP = [
+		/*this.MAP = [
 			'#........++........#',
 			'#######......#######',
 		    '#.###.###..###.###.#',
@@ -18,8 +18,8 @@ var Maze = cc.Node.extend( {
 		    '....###..++#..#.....',
 			'#.+.....#*.#.......#'
 			
-		];
-	/*	this.MAP = [
+		];*/
+		this.MAP = [
 			'#........++........#',
 			'....................',
 		    '....................',
@@ -34,7 +34,7 @@ var Maze = cc.Node.extend( {
 		    '....###....#..#.....',
 			'#.+.....#..#.......#'
 			
-		];*/
+		];
 		
 		for ( var r = 0; r < this.HEIGHT; r++ ){
 			for ( var c = 0; c < this.WIDTH; c++ ){
@@ -65,7 +65,7 @@ var Maze = cc.Node.extend( {
 	isWall: function( blockX, blockY ){
 		var r = this.HEIGHT - blockY - 1;
 		var c = blockX;
-		//console.log('r = ' + r + ' c = ' + c);
+		console.log(blockX + " : " + blockY);
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
 			return ( ( this.MAP[ r ][ c ] == '#' ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
 		}
