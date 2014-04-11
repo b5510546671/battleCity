@@ -63,6 +63,7 @@ var Maze = cc.Node.extend( {
 	},
 
 	isWall: function( blockX, blockY ){
+        console.log(blockX, blockY);
 		var r = this.HEIGHT - blockY - 1;
 		var c = blockX;
 		console.log(blockX + " : " + blockY);

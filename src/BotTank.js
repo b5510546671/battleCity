@@ -72,29 +72,48 @@ var BotTank = cc.Sprite.extend( {
     
     okToShoot: function() {
         if (this.gameLayer.tank.getPositionX() == this.getPositionX()) {
-            console.log("x == x");
-            var blockY = ( this.y + 20 ) / 40;
-            var tankBlockY = ( this.gameLayer.tank.getPositionY() + 20 ) / 40;
-            var start = blockY <= tankBlockY ? blockY : tankBlockY;
+           // console.log("x == x");
+            var blockY = ( this.y + 60 ) / 40;
+            var tankBlockY = ( this.gameLayer.tank.getPositionY() + 60 ) / 40;
+            var start = blockY <= tankBlockY ? blockY-1 : tankBlockY;
             var end = start == blockY ? tankBlockY : blockY;
-            for (start; start < end; start++) {
-                if (this.gameLayer.maze.isWall(Math.round((this.getPositionX() + 20) / 40), Math.round(start))) {
+            for ( start; start < end; start++ ) {
+                
+                
+                
+                if ( this.gameLayer.maze.isWall( start ) ){
+                     console.log( 'x == x start is ' + start );
+                    //console.log('============================================');
+                    return false;
+                }
+                
+                /*if ( this.gameLayer.maze.isWall(Math.round((this.getPositionX() + 20) / 40), Math.round(start)) ) {
                     return false;   
-                }   
+                }  */ 
             }
+            console.log( 'true true true true' );
             return true;
         }
         else {
-            console.log("y == y");
+        //    console.log("y == y");
             var blockX = ( this.x + 20 ) / 40;
             var tankBlockX = ( this.gameLayer.tank.getPositionX() + 20 ) / 40;
             var start = blockX <= tankBlockX ? blockX : tankBlockX;
             var end = start == blockX ? tankBlockX : blockX;
             for (start; start < end; start++) {
-                if (this.gameLayer.maze.isWall(Math.round(start), Math.round((this.getPositionY() + 20) / 40))) {
+                /*if (this.gameLayer.maze.isWall(Math.round(start), Math.round((this.getPositionY() + 60) / 40))) {
                     return false;   
-                } 
+                } */
+                
+               
+                
+                if ( this.gameLayer.maze.isWall( start ) ){
+                     console.log( 'y == y start is ' + start );
+                    //console.log('============================================');
+                    return false;
+                }
             }
+            console.log( 'true true true true' );
             return true;
         }
     },

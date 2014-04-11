@@ -54,7 +54,7 @@ var Bullet = cc.Sprite.extend( {
 			if( !this.isPossibleToMove( this.pointingDirection ) ){
 				//REMOVE THAT BULLET FROM SCREEN
 				this.gameLayer.removeChild( this );
-				console.log( 'bullet will be removed from this screen ' );
+				//console.log( 'bullet will be removed from this screen ' );
 			}
 
 			var xPosit = ( this.x - 20 ) / 40;
@@ -88,8 +88,8 @@ var Bullet = cc.Sprite.extend( {
 
 		if( breakableWall ){
 			//this.gameLayer.removeChild( this );
-			console.log("xPosit " + xPosit + " , yPosit " + yPosit);
-			console.log( '#######################shoot at wall#########################' );
+			//console.log("xPosit " + xPosit + " , yPosit " + yPosit);
+			//console.log( '#######################shoot at wall#########################' );
 			return true;
 		}
 	},
@@ -102,8 +102,8 @@ var Bullet = cc.Sprite.extend( {
 		var heart = this.maze.getHeart( xPosit, yPosit );
 		//console.log( heart );
 		if( heart ){
-			console.log("xPosit " + xPosit + " , yPosit " + yPosit);
-			console.log( '==============================GAME OVER!==================================' );
+			//console.log("xPosit " + xPosit + " , yPosit " + yPosit);
+			//console.log( '==============================GAME OVER!==================================' );
 
 			this.gameLayer.gameOver( );
 			return true;
@@ -115,8 +115,8 @@ var Bullet = cc.Sprite.extend( {
 		var staticWall = this.maze.getStaticWall( xPosit, yPosit );
 
 		if( staticWall ){
-			console.log("xPosit " + xPosit + " , yPosit " + yPosit);
-			console.log( '#######################shoot at static wall#########################' );
+			//console.log("xPosit " + xPosit + " , yPosit " + yPosit);
+			//console.log( '#######################shoot at static wall#########################' );
 			//this.gameLayer.removeChild( this );
 			return true;
 		}

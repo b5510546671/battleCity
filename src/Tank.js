@@ -67,24 +67,19 @@ var Tank = cc.Sprite.extend( {
 			this.y = 0;
 		}
 	},
-
-	update: function( dt ){
-
-		if( this.isAtCenter( ) ){
+    
+    prepareToMove: function( ){
+        if( this.isAtCenter( ) ){
 			if( !this.isPossibleToMove( this.nextDirection ) ){
 				this.nextDirection = Tank.DIR.STILL;
 			}
 
 			this.direction = this.nextDirection;
-			
-			if( this.nextDirection != Tank.DIR.STILL ){
-				//this.pointingDirection = this.nextDirection;
-			}
-		}
-
-		this.checkOverBounds( );
-
-		switch( this.direction ){
+		}  
+    },
+    
+    move: function( ){
+        switch( this.direction ){
 			case Tank.DIR.UP:
 				this.y += Tank.MOVE_STEP;
 				break;
@@ -98,6 +93,16 @@ var Tank = cc.Sprite.extend( {
 				this.x -= Tank.MOVE_STEP;
 				break;
 		}
+    },
+
+	update: function( dt ){
+
+		this.prepareToMove( );
+
+		this.checkOverBounds( );
+
+		this.move( );
+        
 		this.updatePosition( );
 	},
 
