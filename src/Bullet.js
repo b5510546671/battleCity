@@ -142,7 +142,7 @@ var Bullet = cc.Sprite.extend( {
 		}
 */		
 		return !( this.checkShootBreakableWall( nextBlockX, nextBlockY ) || this.checkShootHeart( nextBlockX, nextBlockY ) || this.checkShootStaticWall( nextBlockX, nextBlockY ) );
-		//return !this.maze.isWall( nextBlockX, nextBlockY );
+		//return !this.maze.isObstacles( nextBlockX, nextBlockY );
 	},
 
 

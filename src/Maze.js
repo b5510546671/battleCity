@@ -81,7 +81,7 @@ var Maze = cc.Node.extend( {
         
 	},
 
-	isWall: function( nextBlockArr ){
+	isObstacles: function( nextBlockArr ){
         var blockX = nextBlockArr[0];
         var blockY = nextBlockArr[1];
        // console.log("blockX, blockY " + blockX, blockY);
@@ -116,7 +116,9 @@ var Maze = cc.Node.extend( {
         var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
         console.log( 'remove breakable wall is called ');
-        this.MAP[ r ][ c ] = ' ';
+        this.MAP[ r ][ c ] = '.';
+        console.log("print this.MAP[R][C] " +this.MAP[r][c] );
+        this.BREAKABLE_WALLS[ r ][ c ] = null;
         this.removeChild( wall );
     },
 

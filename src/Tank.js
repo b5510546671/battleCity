@@ -138,7 +138,7 @@ var Tank = cc.Sprite.extend( {
 			return true;
 		}
         
-		return !this.maze.isWall( this.getNextBlock( dir ) );
+		return !this.maze.isObstacles( this.getNextBlock( dir ) );
 	},
 
 	shoot: function(){
