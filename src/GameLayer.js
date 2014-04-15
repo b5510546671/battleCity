@@ -13,11 +13,24 @@ var GameLayer = cc.LayerColor.extend({
         this.maze.addChild( this.tank );
         
         ////BOT TANK
-        this.btank = new BotTank( 9*40 + 20, 9*40 + 20, this );
-        this.btank.setMaze( this.maze );
-        //this.btank.setNextDirection(BotTank.DIR.UP);
-        this.btank.scheduleUpdate( );
-        this.maze.addChild( this.btank );
+        ///Initializes three bot tank when game starts
+        this.btank1 = new BotTank( 9*40 + 20, 9*40 + 20, this );
+        this.btank1.setMaze( this.maze );
+        //this.btank1.setNextDirection(BotTank.DIR.UP);
+        this.btank1.scheduleUpdate( );
+        this.maze.addChild( this.btank1 );
+        
+        this.btank2 = new BotTank( 1*40 + 20, 10*40 + 20, this );
+        this.btank2.setMaze( this.maze );
+        //this.btank2.setNextDirection(BotTank.DIR.UP);
+        this.btank2.scheduleUpdate( );
+        this.maze.addChild( this.btank2 );
+        
+        this.btank3 = new BotTank( 18*40 + 20, 10*40 + 20, this );
+        this.btank3.setMaze( this.maze );
+        //this.btank3.setNextDirection(BotTank.DIR.UP);
+        this.btank3.scheduleUpdate( );
+        this.maze.addChild( this.btank3 );
         ////
         
         this.setKeyboardEnabled( true );
