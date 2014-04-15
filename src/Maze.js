@@ -109,7 +109,9 @@ var Maze = cc.Node.extend( {
     getBreakableWall: function( xPosit, yPosit ){
         var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
-		return this.BREAKABLE_WALLS[ r ][ c ];
+        if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
+		  return this.BREAKABLE_WALLS[ r ][ c ];
+        }
     },
     
     removeBreakableWall: function( xPosit, yPosit, wall ){

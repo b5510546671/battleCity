@@ -8,8 +8,8 @@ var BotTank = cc.Sprite.extend( {
         this.setPicture( this.direction );
 		this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
         this.setPicture( this.nextDirection );
-        console.log( this.direction );
-        console.log( this.nextDirection );
+        //console.log( this.direction );
+        //console.log( this.nextDirection );
 
 		this.pointingDirection = BotTank.DIR.UP;
 
