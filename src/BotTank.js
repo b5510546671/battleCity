@@ -74,7 +74,7 @@ var BotTank = cc.Sprite.extend( {
 	},
     
     okToShoot: function() {
-
+        
     },
 
     checkOverBounds: function( ){

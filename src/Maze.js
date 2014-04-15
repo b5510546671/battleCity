@@ -82,14 +82,16 @@ var Maze = cc.Node.extend( {
 	},
 
 	isObstacles: function( nextBlockArr ){
-        var blockX = nextBlockArr[0];
-        var blockY = nextBlockArr[1];
+        var xPosit = nextBlockArr[0];
+        var yPosit = nextBlockArr[1];
        // console.log("blockX, blockY " + blockX, blockY);
-		var r = this.HEIGHT - blockY - 1;
-		var c = blockX;
+		var r = this.HEIGHT - yPosit - 1;
+		var c = xPosit;
 	//	console.log(blockX + " : " + blockY);
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
-			return ( ( this.MAP[ r ][ c ] == '#' ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
+            //return ( ( this.MAP[ r ][ c ] == '#' ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
+
+			return ( ( this.isBreakableWall( xPosit, yPosit ) ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
 		}
 		else{
 			return true;
@@ -117,9 +119,10 @@ var Maze = cc.Node.extend( {
     removeBreakableWall: function( xPosit, yPosit, wall ){
         var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
-        console.log( 'remove breakable wall is called ');
+        //console.log( 'remove breakable wall is called ');
         this.MAP[ r ][ c ] = '.';
-        console.log("print this.MAP[R][C] " +this.MAP[r][c] );
+        //console.log("print this.MAP[R][C] " +this.MAP[r][c] );
+        //console.log("r is " + r + " c is " + c );
         this.BREAKABLE_WALLS[ r ][ c ] = null;
         this.removeChild( wall );
     },
@@ -129,7 +132,8 @@ var Maze = cc.Node.extend( {
 		var c = xPosit;
 
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
-			return ( this.MAP[ r ][ c ] == '#' );
+			//return ( this.MAP[ r ][ c ] == '#' ); older version of checking
+            return this.BREAKABLE_WALLS[r][c] != null;
 		}
 	},
 
