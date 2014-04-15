@@ -109,10 +109,30 @@ var BotTank = cc.Sprite.extend( {
                 }
                 
                 
-                this.setPicture( this.nextDirection );
+                
 			}
-
-			this.direction = this.nextDirection;
+            
+            else{
+                
+                if( this.gameLayer.count % 2 == 0 ){
+                    this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
+                
+                    while( true ){
+                        if( this.isPossibleToMove( this.nextDirection ) ){
+                            break;   
+                        }
+                    
+                        this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
+                    
+                    }   
+                }
+                
+                
+            }
+                
+                
+            this.setPicture( this.nextDirection );
+            this.direction = this.nextDirection;
 		}  
     },
     

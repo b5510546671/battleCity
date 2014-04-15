@@ -3,7 +3,7 @@ var Maze = cc.Node.extend( {
 		this._super( );
 		this.WIDTH = 20;
 		this.HEIGHT = 13;
-		/*this.MAP = [
+		this.MAP = [
 			'#........++........#',
 			'#######......#######',
 		    '#.###.###..###.###.#',
@@ -18,8 +18,8 @@ var Maze = cc.Node.extend( {
 		    '....###..++#..#.....',
 			'#.+.....#*.#.......#'
 			
-		];*/
-		this.MAP = [
+		];
+/*		this.MAP = [
 			'#........++........#',
 			'....................',
 		    '....................',
@@ -35,7 +35,7 @@ var Maze = cc.Node.extend( {
 			'#.+.....#..#.......#'
 			
 		];
-		
+*/		
 		for ( var r = 0; r < this.HEIGHT; r++ ){
 			for ( var c = 0; c < this.WIDTH; c++ ){
 				if ( this.MAP[ r ][ c ] == '#' ){
