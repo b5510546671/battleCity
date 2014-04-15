@@ -21,9 +21,18 @@ var GameLayer = cc.LayerColor.extend({
         ////
         
         this.setKeyboardEnabled( true );
+        
+        this.score = 0;
+        this.scoreLabel = cc.LabelTTF.create( '000', 'Arial', 32 );
+        this.scoreLabel.setPosition( new cc.Point( 750, 14 * 40 + 15 ) );
+        this.addChild( this.scoreLabel );
+        
+        this.scoreWordLabel = cc.LabelTTF.create( 'Score: ', 'Arial', 32 );
+        this.scoreWordLabel.setPosition( new cc.Point( 650, 14 * 40 + 15 ) );
+        this.addChild( this.scoreWordLabel );
 
-        this.count = 60;
-        this.timeLabel = cc.LabelTTF.create( '60', 'Arial', 32 );
+        this.count = 100;
+        this.timeLabel = cc.LabelTTF.create( '100', 'Arial', 32 );
         this.timeLabel.setPosition( new cc.Point( 100, 14 * 40 + 15 ) );
         this.addChild( this.timeLabel );
         
