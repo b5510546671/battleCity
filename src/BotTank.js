@@ -98,6 +98,17 @@ var BotTank = cc.Sprite.extend( {
             
 			if( !this.isPossibleToMove( this.nextDirection ) ){
 				this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
+                
+                while( true ){
+                    if( this.isPossibleToMove( this.nextDirection ) ){
+                        break;   
+                    }
+                    
+                    this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
+                    
+                }
+                
+                
                 this.setPicture( this.nextDirection );
 			}
 
