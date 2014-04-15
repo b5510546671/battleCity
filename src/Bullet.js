@@ -90,6 +90,7 @@ var Bullet = cc.Sprite.extend( {
 			//this.gameLayer.removeChild( this );
 			//console.log("xPosit " + xPosit + " , yPosit " + yPosit);
 			//console.log( '#######################shoot at wall#########################' );
+            this.maze.removeBreakableWall( xPosit, yPosit, breakableWall );
 			return true;
 		}
 	},
@@ -99,7 +100,7 @@ var Bullet = cc.Sprite.extend( {
 		
 		//console.log( 'xPosit is ' + xPosit + ' yPosit is ' + yPosit );
 
-		var heart = this.maze.getHeart( xPosit, yPosit );
+		var heart = this.maze.isHeart( xPosit, yPosit );
 		//console.log( heart );
 		if( heart ){
 			//console.log("xPosit " + xPosit + " , yPosit " + yPosit);
@@ -112,7 +113,7 @@ var Bullet = cc.Sprite.extend( {
 	},
 
 	checkShootStaticWall: function( xPosit, yPosit ){
-		var staticWall = this.maze.getStaticWall( xPosit, yPosit );
+		var staticWall = this.maze.isStaticWall( xPosit, yPosit );
 
 		if( staticWall ){
 			//console.log("xPosit " + xPosit + " , yPosit " + yPosit);

@@ -19,6 +19,22 @@ var Maze = cc.Node.extend( {
 			'#.+.....#*.#.......#'
 			
 		];
+        
+        this.BREAKABLE_WALLS = [
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ]
+		];
 /*		this.MAP = [
 			'#........++........#',
 			'....................',
@@ -39,10 +55,12 @@ var Maze = cc.Node.extend( {
 		for ( var r = 0; r < this.HEIGHT; r++ ){
 			for ( var c = 0; c < this.WIDTH; c++ ){
 				if ( this.MAP[ r ][ c ] == '#' ){
-					var s = cc.Sprite.create( 'res/images/wall.png' );
-					s.setAnchorPoint( new cc.Point( 0, 0 ) );
-					s.setPosition(  new cc.Point( c * 40, ( this.HEIGHT - r - 1 ) * 40 ) );
-					this.addChild( s );
+                    
+                    var w = new BreakableWall( );
+					w.setPosition(  new cc.Point( c * 40, ( this.HEIGHT - r - 1 ) * 40 ) );
+                    w.setAnchorPoint( new cc.Point( 0, 0 ) );
+                    this.BREAKABLE_WALLS[ r ][ c ] = w;
+					this.addChild( w );
 					
 				}
 				else if ( this.MAP[ r ][ c ] == '+' ){
@@ -60,6 +78,7 @@ var Maze = cc.Node.extend( {
 				
 			}
 		}
+        
 	},
 
 	isWall: function( nextBlockArr ){
@@ -77,7 +96,7 @@ var Maze = cc.Node.extend( {
 		}
 	},
 
-	getHeart: function( xPosit, yPosit ){
+	isHeart: function( xPosit, yPosit ){
 
 		var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
@@ -86,8 +105,22 @@ var Maze = cc.Node.extend( {
 			return ( this.MAP[ r ][ c ] == '*' );
 		}
 	},
+    
+    getBreakableWall: function( xPosit, yPosit ){
+        var r = this.HEIGHT - yPosit - 1;
+		var c = xPosit;
+		return this.BREAKABLE_WALLS[ r ][ c ];
+    },
+    
+    removeBreakableWall: function( xPosit, yPosit, wall ){
+        var r = this.HEIGHT - yPosit - 1;
+		var c = xPosit;
+        console.log( 'remove breakable wall is called ');
+        this.MAP[ r ][ c ] = ' ';
+        this.removeChild( wall );
+    },
 
-	getBreakableWall: function( xPosit, yPosit ){
+	isBreakableWall: function( xPosit, yPosit ){
 		var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
 
@@ -96,7 +129,7 @@ var Maze = cc.Node.extend( {
 		}
 	},
 
-	getStaticWall: function( xPosit, yPosit ){
+	isStaticWall: function( xPosit, yPosit ){
 		var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
 
