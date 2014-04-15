@@ -2,7 +2,7 @@ var Tank = cc.Sprite.extend( {
 
 	ctor: function( x, y, gameLayer ){
 		this._super( );
-		this.initWithFile( 'res/images/plane.png' );
+		this.initWithFile( 'res/images/player_tank_up.png' );
 
 		this.direction = Tank.DIR.STILL;
 		this.nextDirection = Tank.DIR.STILL;
@@ -18,19 +18,19 @@ var Tank = cc.Sprite.extend( {
 	setPicture: function( dir ){
 		switch( dir ){
 			case Tank.DIR.UP:
-				this.initWithFile( 'res/images/plane.png' );
+				this.initWithFile( 'res/images/player_tank_up.png' );
 				this.pointingDirection = Tank.DIR.UP;
 				break;
 			case Tank.DIR.DOWN:
-				this.initWithFile( 'res/images/plane_down.png' );
+				this.initWithFile( 'res/images/player_tank_down.png' );
 				this.pointingDirection = Tank.DIR.DOWN;
 				break;
 			case Tank.DIR.LEFT:
-				this.initWithFile( 'res/images/plane_left.png' );
+				this.initWithFile( 'res/images/player_tank_left.png' );
 				this.pointingDirection = Tank.DIR.LEFT;
 				break;
 			case Tank.DIR.RIGHT:
-				this.initWithFile( 'res/images/plane_right.png' );
+				this.initWithFile( 'res/images/player_tank_right.png' );
 				this.pointingDirection = Tank.DIR.RIGHT;
 				break;
 		}

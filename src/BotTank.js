@@ -2,7 +2,7 @@ var BotTank = cc.Sprite.extend( {
 
 	ctor: function( x, y, gameLayer ){
 		this._super( );
-		this.initWithFile( 'res/images/plane.png' );
+		this.initWithFile( 'res/images/bot_tank_up.png' );
 
 		this.direction = BotTank.DIR.UP;
         this.setPicture( this.direction );
@@ -23,19 +23,19 @@ var BotTank = cc.Sprite.extend( {
 	setPicture: function( dir ){
 		switch( dir ){
 			case BotTank.DIR.UP:
-				this.initWithFile( 'res/images/plane.png' );
+				this.initWithFile( 'res/images/bot_tank_up.png' );
 				this.pointingDirection = BotTank.DIR.UP;
 				break;
 			case BotTank.DIR.DOWN:
-				this.initWithFile( 'res/images/plane_down.png' );
+				this.initWithFile( 'res/images/bot_tank_down.png' );
 				this.pointingDirection = BotTank.DIR.DOWN;
 				break;
 			case BotTank.DIR.LEFT:
-				this.initWithFile( 'res/images/plane_left.png' );
+				this.initWithFile( 'res/images/bot_tank_left.png' );
 				this.pointingDirection = BotTank.DIR.LEFT;
 				break;
 			case BotTank.DIR.RIGHT:
-				this.initWithFile( 'res/images/plane_right.png' );
+				this.initWithFile( 'res/images/bot_tank_right.png' );
 				this.pointingDirection = BotTank.DIR.RIGHT;
 				break;
 		}
