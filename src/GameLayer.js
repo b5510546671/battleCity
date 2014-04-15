@@ -93,7 +93,7 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     gameOver: function( ){
-        var gameOver = new GameOverLayer( );
+        var gameOver = new GameOverLayer( this.score );
         this.setKeyboardEnabled( false );
         this.getScheduler( ).unscheduleAllCallbacks( );
         this.addChild( gameOver );

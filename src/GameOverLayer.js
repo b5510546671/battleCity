@@ -1,7 +1,10 @@
 var GameOverLayer = cc.LayerColor.extend({
 
-    ctor:function ( ) {
+    ctor:function ( score ) {
         this._super( );
+        
+        
+        this.score = score;
         this.init( );
     },
 
@@ -13,12 +16,16 @@ var GameOverLayer = cc.LayerColor.extend({
         this.gameOverLabel = cc.LabelTTF.create( 'GAME OVER!', 'Arial', 60 );
         this.gameOverLabel.setPosition( new cc.Point( 10*40 + 20, 6*40 + 120 ) );
         
-        this.scoreLabel = cc.LabelTTF.create( 'SCORES : ', 'Arial', 60 );
-        this.scoreLabel.setPosition( new cc.Point( 10*40 , 6*40 + 20 ) );
+        this.scoreWordLabel = cc.LabelTTF.create( 'SCORES : ', 'Arial', 60 );
+        this.scoreWordLabel.setPosition( new cc.Point( 7*40 , 6*40 + 20 ) );
+        
+        this.scoreLabel = cc.LabelTTF.create( this.score.toString(), 'Arial', 60 );
+        this.scoreLabel.setPosition( new cc.Point( 14*40, 6*40 + 20 ) );
+        this.addChild( this.scoreLabel );
         
         
         this.addChild( this.gameOverLabel );
-        this.addChild( this.scoreLabel );
+        this.addChild( this.scoreWordLabel );
 
     },
     
