@@ -65,10 +65,10 @@ var Maze = cc.Node.extend( {
 	isWall: function( nextBlockArr ){
         var blockX = nextBlockArr[0];
         var blockY = nextBlockArr[1];
-        console.log("blockX, blockY " + blockX, blockY);
+       // console.log("blockX, blockY " + blockX, blockY);
 		var r = this.HEIGHT - blockY - 1;
 		var c = blockX;
-		console.log(blockX + " : " + blockY);
+	//	console.log(blockX + " : " + blockY);
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
 			return ( ( this.MAP[ r ][ c ] == '#' ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
 		}

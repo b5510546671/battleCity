@@ -4,13 +4,16 @@ var BotTank = cc.Sprite.extend( {
 		this._super( );
 		this.initWithFile( 'res/images/plane.png' );
 
-		this.direction = BotTank.DIR.STILL;
-		this.nextDirection = BotTank.DIR.STILL;
+		this.direction = BotTank.DIR.UP;
+        this.setPicture( this.direction );
+		this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
+        this.setPicture( this.nextDirection );
+        console.log( this.direction );
+        console.log( this.nextDirection );
 
 		this.pointingDirection = BotTank.DIR.UP;
 
-        this.lastShoot = new Date().getTime();
-        
+                
 		this.x = x;
 		this.y = y;
 		this.gameLayer = gameLayer;
@@ -71,105 +74,39 @@ var BotTank = cc.Sprite.extend( {
 	},
     
     okToShoot: function() {
-        if (this.gameLayer.tank.getPositionX() == this.getPositionX()) {
-           // console.log("x == x");
-            var blockY = ( this.y + 60 ) / 40;
-            var tankBlockY = ( this.gameLayer.tank.getPositionY() + 60 ) / 40;
-            var start = blockY <= tankBlockY ? blockY-1 : tankBlockY;
-            var end = start == blockY ? tankBlockY : blockY;
-            for ( start; start < end; start++ ) {
-                
-                
-                
-                if ( this.gameLayer.maze.isWall( start ) ){
-                     console.log( 'x == x start is ' + start );
-                    //console.log('============================================');
-                    return false;
-                }
-                
-                /*if ( this.gameLayer.maze.isWall(Math.round((this.getPositionX() + 20) / 40), Math.round(start)) ) {
-                    return false;   
-                }  */ 
-            }
-            console.log( 'true true true true' );
-            return true;
-        }
-        else {
-        //    console.log("y == y");
-            var blockX = ( this.x + 20 ) / 40;
-            var tankBlockX = ( this.gameLayer.tank.getPositionX() + 20 ) / 40;
-            var start = blockX <= tankBlockX ? blockX : tankBlockX;
-            var end = start == blockX ? tankBlockX : blockX;
-            for (start; start < end; start++) {
-                /*if (this.gameLayer.maze.isWall(Math.round(start), Math.round((this.getPositionY() + 60) / 40))) {
-                    return false;   
-                } */
-                
-               
-                
-                if ( this.gameLayer.maze.isWall( start ) ){
-                     console.log( 'y == y start is ' + start );
-                    //console.log('============================================');
-                    return false;
-                }
-            }
-            console.log( 'true true true true' );
-            return true;
-        }
+
     },
 
-	update: function( dt ){
+    checkOverBounds: function( ){
+		if( this.getPositionX( ) < 0 ){
+			this.x = 800;
+		}
+		else if( this.getPositionX( ) > 800 ){
+			this.x = 0;
+		}
+		else if( this.getPositionY( ) < 0 ){
+			this.y = 600;
+		}
+		else if( this.getPositionY( ) > 600 ){
+			this.y = 0;
+		}
+	},
+    
+    prepareToMove: function( ){
         
-        //if (!this.isPossibleToMove() || this.nextDirection == BotTank.DIR.STILL) {
-        //    this.nextDirection = Math.round(Math.random() * 4) + 1;
-        //}
-        
-        // shoot
-        if (this.gameLayer.tank.getPositionX() == this.getPositionX()) {
-            console.log(this.okToShoot( ));
-            if (this.okToShoot( )) {
-                 if (this.gameLayer.tank.getPositionY() - this.getPositionY() > 0) {
-                    this.setDirection( BotTank.DIR.UP );
-                    this.setPicture( BotTank.DIR.UP );
-                }
-                else if (this.gameLayer.tank.getPositionY() - this.getPositionY() < 0) {
-                    this.setDirection( BotTank.DIR.DOWN );
-                    this.setPicture( BotTank.DIR.DOWN ); 
-                }
-                this.shoot();
-            }
-        }
-        
-        if (this.gameLayer.tank.getPositionY() == this.getPositionY()) {
-            console.log(this.okToShoot( ));
-            if (this.okToShoot( )) {
-                if (this.gameLayer.tank.getPositionX() - this.getPositionX() > 0) {
-                    this.setDirection( BotTank.DIR.RIGHT );
-                    this.setPicture( BotTank.DIR.RIGHT );
-                }
-                else if (this.gameLayer.tank.getPositionX() - this.getPositionX() < 0) {
-                    this.setDirection( BotTank.DIR.LEFT );
-                    this.setPicture( BotTank.DIR.LEFT ); 
-                }
-                this.shoot();
-            }
-        }
-        
-		if( this.isAtCenter( ) ){
+        if( this.isAtCenter( ) ){
+            
 			if( !this.isPossibleToMove( this.nextDirection ) ){
-				this.nextDirection = BotTank.DIR.STILL;
+				this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
+                this.setPicture( this.nextDirection );
 			}
 
 			this.direction = this.nextDirection;
-			
-			if( this.nextDirection != BotTank.DIR.STILL ){
-				//this.pointingDirection = this.nextDirection;
-			}
-		}
-
-		this.checkOverBounds( );
-
-		switch( this.direction ){
+		}  
+    },
+    
+    move: function( ){
+        switch( this.direction ){
 			case BotTank.DIR.UP:
 				this.y += BotTank.MOVE_STEP;
 				break;
@@ -183,7 +120,19 @@ var BotTank = cc.Sprite.extend( {
 				this.x -= BotTank.MOVE_STEP;
 				break;
 		}
+    },
+    
+	update: function( dt ){
+        
+        
+        this.prepareToMove( );
+
+		this.checkOverBounds( );
+
+		this.move( );
+        
 		this.updatePosition( );
+        
 	},
 
 
@@ -191,26 +140,34 @@ var BotTank = cc.Sprite.extend( {
 		return ( ( this.x + 20 ) % 40 == 0 ) && ( ( this.y + 20 ) % 40 == 0 );
 	},
 
-	isPossibleToMove: function( dir ){
-		if( dir == BotTank.DIR.STILL ){
-			return true;
-		}
-		var nextBlockX = ( this.x - 20 ) / 40;
+	getNextBlock: function( dir ){
+        var nextBlockX = ( this.x - 20 ) / 40;
 		var nextBlockY = ( this.y - 20 ) / 40;
 
-		if( dir == BotTank.DIR.UP ){
-			nextBlockY += 1;
+        switch( dir ){
+            case Tank.DIR.UP:
+                nextBlockY += 1;
+                break;
+            case Tank.DIR.DOWN:
+                nextBlockY -= 1;
+                break;
+            case Tank.DIR.LEFT:
+                nextBlockX -= 1;
+                break;
+            case Tank.DIR.RIGHT:
+                nextBlockX += 1;
+                break;
+        }
+        return [nextBlockX, nextBlockY];
+                
+    },
+
+	isPossibleToMove: function( dir ){
+		if( dir == Tank.DIR.STILL ){
+			return true;
 		}
-		else if( dir == BotTank.DIR.DOWN ){
-			nextBlockY -= 1;
-		}
-		else if( dir == BotTank.DIR.LEFT ){
-			nextBlockX -= 1;
-		}
-		else if( dir == BotTank.DIR.RIGHT ){
-			nextBlockX += 1;
-		}
-		return !this.maze.isWall( nextBlockX, nextBlockY );
+        
+		return !this.maze.isWall( this.getNextBlock( dir ) );
 	},
 
 	shoot: function(){

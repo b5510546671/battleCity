@@ -12,7 +12,7 @@ var GameLayer = cc.LayerColor.extend({
         this.tank.scheduleUpdate( );
         this.maze.addChild( this.tank );
         
-        ////
+        ////BOT TANK
         this.btank = new BotTank( 9*40 + 20, 9*40 + 20, this );
         this.btank.setMaze( this.maze );
         //this.btank.setNextDirection(BotTank.DIR.UP);
