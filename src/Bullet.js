@@ -13,6 +13,14 @@ var Bullet = cc.Sprite.extend( {
       
 		this.update();
 	},
+    
+    getXPosition: function( ){
+        return this.x;   
+    },
+    
+    getYPosition: function( ){
+        return this.y;  
+    },
 
 	createBullet: function( dir ){
 		//console.log(this.pointingDirection);
@@ -122,8 +130,8 @@ var Bullet = cc.Sprite.extend( {
 			return true;
 		}
 	},
-
-	isPossibleToMove: function( dir ){
+    
+    isPossibleToMove: function( dir ){
 		
 		var nextBlockX = ( this.x - 20 ) / 40;
 		var nextBlockY = ( this.y - 40 - 20 ) / 40;

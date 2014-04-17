@@ -201,8 +201,8 @@ var BotTank = cc.Sprite.extend( {
 		return !this.maze.isObstacles( this.getNextBlock( dir ) );
 	},
 
-	shoot: function(){
-        if (new Date().getTime() - this.lastShoot >= 600) {
+	shoot: function( ){
+        if (new Date( ).getTime( ) - this.lastShoot >= 600) {
             this.lastShoot = new Date().getTime();
             
             //console.log( "FOR TANK " + this.x + " , " + this.y );
@@ -210,7 +210,13 @@ var BotTank = cc.Sprite.extend( {
               this.gameLayer.shoot( this.x, this.y, this.pointingDirection );
             }
         }
-	}
+	},
+    
+    isHurt: function( bullet ){
+        
+        return ( this.x == bullet.getXPosition( ) && this.y == bullet.getYPosition( ) );
+        
+    },
 
 
 } );
