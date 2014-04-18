@@ -58,19 +58,19 @@ var Bullet = cc.Sprite.extend( {
 	},
 
 	update: function( dt ){
-		if( this.isAtCenter( ) ){
-			if( !this.isPossibleToMove( this.pointingDirection ) ){
-				//REMOVE THAT BULLET FROM SCREEN
-				this.gameLayer.removeChild( this );
-				//console.log( 'bullet will be removed from this screen ' );
-			}
+//		if( this.isAtCenter( ) ){
+//			if( !this.isPossibleToMove( this.pointingDirection ) ){
+//				//REMOVE THAT BULLET FROM SCREEN
+//				this.gameLayer.removeChild( this );
+//				//console.log( 'bullet will be removed from this screen ' );
+//			}
 
-			var xPosit = ( this.x - 20 ) / 40;
-			var yPosit = ( this.y - 20 ) / 40;
+			//var xPosit = ( this.x - 20 ) / 40;
+			//var yPosit = ( this.y - 20 ) / 40;
 
 			//this.checkShootHeart( xPosit, yPosit );
 			//this.checkShootBreakableWall( xPosit, yPosit );
-		}
+//		}
 
 		switch( this.pointingDirection ){
 			case Tank.DIR.UP:

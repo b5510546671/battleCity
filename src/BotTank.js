@@ -213,15 +213,20 @@ var BotTank = cc.Sprite.extend( {
 	},
     
     isHurt: function( bullet ){
+        var botBlockX = ( this.x - 20 ) / 40;
+		var botBlockY = ( this.y - 20 ) / 40;
         
-        return ( this.x == bullet.getXPosition( ) && this.y == bullet.getYPosition( ) );
+        var bulletBlockX = ( bullet.getXPosition( ) - 20 ) / 40;
+		var bulletBlockY = ( bullet.getYPosition( ) - 20 ) / 40;
+        
+        return ( botBlockX == bulletBlockX  && botBlockY == bulletBlockY );
         
     },
 
 
 } );
 
-BotTank.MOVE_STEP = 5;
+BotTank.MOVE_STEP = 1;
 BotTank.DIR = {
 	LEFT: 1,
 	RIGHT: 2,
