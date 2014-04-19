@@ -10,9 +10,15 @@ var Bullet = cc.Sprite.extend( {
 		this.createBullet( this.pointingDirection );
 
 		this.gameLayer = gameLayer;
+        
+//        this.hitCallback = null;
       
 		this.update();
 	},
+    
+//    setHitCallback: function( callback ){
+//        this.hitCallback = callback;  
+//    },
     
     getXPosition: function( ){
         return this.x;   
@@ -98,7 +104,15 @@ var Bullet = cc.Sprite.extend( {
 			//this.gameLayer.removeChild( this );
 			//console.log("xPosit " + xPosit + " , yPosit " + yPosit);
 			//console.log( '#######################shoot at wall#########################' );
+            
+//            if( this.hitCallback ){
+//                this.hitCallback( breakableWall );   
+//            }
+            
+            this.gameLayer.editPoints( -20 );
+            
             this.maze.removeBreakableWall( xPosit, yPosit, breakableWall );
+            
 			return true;
 		}
 	},

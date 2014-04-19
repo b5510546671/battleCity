@@ -70,6 +70,15 @@ var GameLayer = cc.LayerColor.extend({
         return true;
     },
     
+    updateScoreLabel: function( ){
+        this.scoreLabel.setString( this.score );  
+    },
+    
+//    registerHitCallBack: function( ){
+//        var gameLayer = this;
+//        this.bullet
+//    },
+    
     createBotTank: function( xPosit, yPosit  ) {
         var btank = new BotTank( xPosit*40 + 20, yPosit*40 + 20, this );
         btank.setMaze( this.maze );
@@ -178,6 +187,11 @@ var GameLayer = cc.LayerColor.extend({
         this.timeLabel -= 1;
         this.timeLabel.setString( this.timeLabel );
     },
+    
+    editPoints: function( points ){
+        this.score += points;
+        this.updateScoreLabel( );
+    },
 
     onKeyDown: function( e ){
         switch( e ){
@@ -210,6 +224,12 @@ var GameLayer = cc.LayerColor.extend({
     shoot: function( x, y, pointingDirection ){
         //console.log('shoot in GameLayer is done');
         var bullet = new Bullet( x, y, pointingDirection, this.maze, this );
+        
+//        bullet.setHitCallback( function( bullet ) {
+//            this.score -= 20;
+//            
+//        });
+        
         this.scheduleOnce( function( ){
             //console.log( 'removeChild is called' );
             this.removeChild( bullet );
