@@ -226,7 +226,7 @@ var BotTank = cc.Sprite.extend( {
 
 } );
 
-BotTank.MOVE_STEP = 1;
+BotTank.MOVE_STEP = 5;
 BotTank.DIR = {
 	LEFT: 1,
 	RIGHT: 2,

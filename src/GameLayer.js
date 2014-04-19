@@ -78,23 +78,24 @@ var GameLayer = cc.LayerColor.extend({
     },
     
     update: function() {
+        
         for (var i = 0; i < this.bullets.length; i++) {
             for (var j = 0; j < this.botTanks.length; j++) {
-                if (this.bullets[i].isAtCenter( )) {
-                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
-                    var bullBlockY = Math.round((this.bullets[i].y - 20 + 40 ) / 40);
-                    var tankBlockX = Math.round((this.botTanks[j].x - 20 ) / 40);
-                    var tankBlockY = Math.round((this.botTanks[j].y - 20 + 40 ) / 40);
-                    
-                    
-                    if (bullBlockX == tankBlockX && bullBlockY == tankBlockY) {
-                    console.log(bullBlockX + " " + bullBlockY + " " + tankBlockX + " " + tankBlockY);
-                        this.removeChild(this.bullets[i]);
-                        this.removeChild(this.botTanks[i]);
-                        this.removeElement(this.bullets, this.bullets[i]);
-                        this.removeElement(this.botTanks, this.botTanks[j]);
-                    }
-                    else {
+//                if (this.bullets[i].isAtCenter( )) {
+//                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
+//                    var bullBlockY = Math.round((this.bullets[i].y - 20 + 40 ) / 40);
+//                    var tankBlockX = Math.round((this.botTanks[j].x - 20 ) / 40);
+//                    var tankBlockY = Math.round((this.botTanks[j].y - 20 + 40 ) / 40);
+//                    
+//                    
+//                    if (bullBlockX == tankBlockX && bullBlockY == tankBlockY) {
+//                    console.log(bullBlockX + " " + bullBlockY + " " + tankBlockX + " " + tankBlockY);
+//                        this.removeChild(this.bullets[i]);
+//                        this.removeChild(this.botTanks[i]);
+//                        this.removeElement(this.bullets, this.bullets[i]);
+//                        this.removeElement(this.botTanks, this.botTanks[j]);
+//                    }
+//                    else {
                         if( this.bullets[i].isAtCenter( ) ){
                             if( !this.bullets[i].isPossibleToMove( this.bullets[i].pointingDirection ) ){
                                 //REMOVE THAT BULLET FROM SCREEN
@@ -102,8 +103,8 @@ var GameLayer = cc.LayerColor.extend({
                                 //console.log( 'bullet will be removed from this screen ' );
                             }
                         }
-                    }
-                }
+//                    }
+//                }
             }
         }
     },
