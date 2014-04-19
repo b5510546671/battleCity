@@ -223,16 +223,18 @@ var BotTank = cc.Sprite.extend( {
         return ( botBlockX == bulletBlockX  && botBlockY == bulletBlockY );
         
     },
-    
-    isSamePosition: function( playerTankX, playerTankY ){
-        return ( this.x == playerTankX && this.y == playerTankY );
+    //TODO FIX BUGS when collide. In this case, we check whether the center of bot bot and player equal to each other. But we should check  object as a whole NOT just the center of the object. To do this, we should make the check point larger to be as a whole tank object. Thus, figure out how to do this.
+    isBotAndPlayerInSamePosition: function( ){
+        var playerTankBlockX = ( this.gameLayer.tank.getPositionX( ) - 20 ) / 40;
+        var playerTankBlockY = ( this.gameLayer.tank.getPositionY( ) - 20 ) / 40;
+        var botBlockX = ( this.x - 20 ) / 40;
+		var botBlockY = ( this.y - 20 ) / 40;
+        
+        return ( botBlockX == playerTankBlockX  && botBlockY == playerTankBlockY );
     },
     
     checkCollisionWithTank: function( ){
-        var playerTankX = this.gameLayer.tank.getPositionX( );
-        var playerTankY = this.gameLayer.tank.getPositionY( );
-        
-        if( this.isSamePosition( playerTankX, playerTankY ) ){
+        if( this.isBotAndPlayerInSamePosition( ) ){
             this.gameLayer.gameOver( );   
         }
         
