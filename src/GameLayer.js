@@ -64,17 +64,68 @@ var GameLayer = cc.LayerColor.extend({
             this.count -= 1;
             this.timeLabel.setString( this.count );
         }, 1 );
+        
+        this.decideToCreateBotTank( );
 
         return true;
     },
     
-    createBotTank: function( blockX, blockY  ) {
-        var btank = new BotTank( blockX*40 + 20, blockY*40 + 20, this );
+    createBotTank: function( xPosit, yPosit  ) {
+        var btank = new BotTank( xPosit*40 + 20, yPosit*40 + 20, this );
         btank.setMaze( this.maze );
         this.maze.addChild( btank );
         btank.scheduleUpdate( );
         
         this.botTanks.push( btank );
+    },
+    
+    decideToCreateBotTank: function( ){
+        this.schedule( function( ){
+            if( this.count % 5 == 0 ){
+                var randomNum = new Date( ).getMilliseconds( );
+                console.log(randomNum % 7);
+                var botTankLocationArr = this.decideBotTankBirthLocation( randomNum % 7 );
+                var xPosit = botTankLocationArr[0];
+                var yPosit = botTankLocationArr[1];
+                this.createBotTank(xPosit, yPosit);   
+            }
+        }, 1 );
+    },
+    
+    decideBotTankBirthLocation: function( randomNumModSeven ){
+        var xPosit = 0;
+        var yPosit = 0;
+        switch( randomNumModSeven ){
+            case randomNumModSeven == 0:
+                xPosit = 1;
+                yPosit = 12;
+                break;
+            case randomNumModSeven == 1:
+                xPosit = 10;
+                yPosit = 11;
+                break;
+            case randomNumModSeven == 2:
+                xPosit = 18;
+                yPosit = 12;
+                break;
+            case randomNumModSeven == 3:
+                xPosit = 1;
+                yPosit = 6;
+                break;
+            case randomNumModSeven == 4:
+                xPosit = 18;
+                yPosit = 6;
+                break;
+            case randomNumModSeven == 5:
+                xPosit = 1;
+                yPosit = 0;
+                break;
+            case randomNumModSeven == 6:
+                xPosit = 18;
+                yPosit = 0;
+                break;
+        }
+        return [xPosit, yPosit];
     },
     
     update: function() {
