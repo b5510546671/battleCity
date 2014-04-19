@@ -155,6 +155,7 @@ var BotTank = cc.Sprite.extend( {
     
 	update: function( dt ){
         
+        this.checkCollisionWithTank( );
         
         this.prepareToMove( );
 
@@ -220,6 +221,20 @@ var BotTank = cc.Sprite.extend( {
 		var bulletBlockY = ( bullet.getYPosition( ) - 20 ) / 40;
         
         return ( botBlockX == bulletBlockX  && botBlockY == bulletBlockY );
+        
+    },
+    
+    isSamePosition: function( playerTankX, playerTankY ){
+        return ( this.x == playerTankX && this.y == playerTankY );
+    },
+    
+    checkCollisionWithTank: function( ){
+        var playerTankX = this.gameLayer.tank.getPositionX( );
+        var playerTankY = this.gameLayer.tank.getPositionY( );
+        
+        if( this.isSamePosition( playerTankX, playerTankY ) ){
+            this.gameLayer.gameOver( );   
+        }
         
     },
 

@@ -128,6 +128,13 @@ var GameLayer = cc.LayerColor.extend({
         return [xPosit, yPosit];
     },
     
+//    checkTanksCollision: function( ){
+//        var playerTankX = this.tank.getPositionX( );
+//        var playerTankY = this.tank.getPositionY( );
+//        
+//        
+//    },
+    
     update: function() {
         
         for (var i = 0; i < this.bullets.length; i++) {
