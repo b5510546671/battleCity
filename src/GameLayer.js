@@ -239,6 +239,22 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( bullet );
         bullet.scheduleUpdate( );
     },
+    
+    pauseBotTanks: function( seconds ){
+        var endTime = this.count - seconds;
+        
+        for( var i = 0; i < this.botTanks.length; i++ ){
+            this.botTanks[i].unscheduleUpdate( );   
+        }
+        
+        this.schedule( function( ){
+            if( this.count == endTime ){
+                for( var i = 0; i < this.botTanks.length; i++ ){
+                    this.botTanks[i].scheduleUpdate( );   
+                }
+            }
+        }, 1);
+    },
 
     gameOver: function( ){
         var gameOver = new GameOverLayer( this.score );

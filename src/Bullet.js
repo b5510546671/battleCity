@@ -122,13 +122,18 @@ var Bullet = cc.Sprite.extend( {
 		
 		//console.log( 'xPosit is ' + xPosit + ' yPosit is ' + yPosit );
 
-		var heart = this.maze.isHeart( xPosit, yPosit );
+		var heart = this.maze.getHeart( xPosit, yPosit );
 		//console.log( heart );
 		if( heart ){
 			//console.log("xPosit " + xPosit + " , yPosit " + yPosit);
 			//console.log( '==============================GAME OVER!==================================' );
-
-			this.gameLayer.gameOver( );
+            
+            this.gameLayer.editPoints( -80 );
+            
+            this.maze.removeHeart( heart );
+            this.gameLayer.pauseBotTanks( 10 );
+            
+			//this.gameLayer.gameOver( );
 			return true;
 		}
 		

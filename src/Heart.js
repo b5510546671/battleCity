@@ -14,10 +14,4 @@ var Heart = cc.Sprite.extend( {
 		return cc.RepeatForever.create( cc.Animate.create( animation ) );
 	},
 
-	/*getShot: function( shot ){
-		if( shot ){
-			this.stopAction( this.movingAction );
-		}
-	}*/
-
 } );

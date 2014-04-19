@@ -35,6 +35,8 @@ var Maze = cc.Node.extend( {
 			[ ],
 			[ ]
 		];
+        
+        this.HEART = [];
 /*		this.MAP = [
 			'#........++........#',
 			'....................',
@@ -70,10 +72,11 @@ var Maze = cc.Node.extend( {
 					this.addChild( s );
 				}
 				else if ( this.MAP[ r ][ c ] == '*' ){
-					var s = new Heart( );
-					s.setAnchorPoint( new cc.Point( 0, 0 ) );
-					s.setPosition( new cc.Point( c * 40, ( this.HEIGHT - r - 1 ) * 40 ) );
-					this.addChild( s );
+					var heart = new Heart( );
+					heart.setAnchorPoint( new cc.Point( 0, 0 ) );
+					heart.setPosition( new cc.Point( c * 40, ( this.HEIGHT - r - 1 ) * 40 ) );
+                    this.HEART[ 0 ] = heart;
+					this.addChild( heart );
 				}
 				
 			}
@@ -91,12 +94,23 @@ var Maze = cc.Node.extend( {
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
             //return ( ( this.MAP[ r ][ c ] == '#' ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
 
-			return ( ( this.isBreakableWall( xPosit, yPosit ) ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.MAP[ r ][ c ] == '*' ) );
+			return ( ( this.isBreakableWall( xPosit, yPosit ) ) || ( this.MAP[ r ][ c ] == '+' ) || ( this.isHeart( xPosit, yPosit ) ) );
 		}
 		else{
 			return true;
 		}
 	},
+    
+    getHeart: function( xPosit, yPosit ){
+        if( this.isHeart( xPosit, yPosit ) ){
+            return this.HEART[ 0 ];
+        }
+    },
+    
+    removeHeart: function( heart ){
+        this.HEART[ 0 ] = null;
+        this.removeChild( heart );
+    },
 
 	isHeart: function( xPosit, yPosit ){
 
@@ -104,7 +118,10 @@ var Maze = cc.Node.extend( {
 		var c = xPosit;
 		//console.log( 'r in getHeart is ' + r + ' c in getHeart is ' + c );
 		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
-			return ( this.MAP[ r ][ c ] == '*' );
+            this.MAP[ r ][ c ] = '.';
+//TODO fix bug here. it happens the same as breakable wall breaks.
+            return this.MAP[ r ][ c ] == '*';
+			//return ( this.HEART[ 0 ] != null );
 		}
 	},
     
