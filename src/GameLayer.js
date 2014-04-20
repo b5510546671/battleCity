@@ -92,7 +92,7 @@ var GameLayer = cc.LayerColor.extend({
         this.schedule( function( ){
             if( this.count % 5 == 0 ){
                 var randomNum = new Date( ).getMilliseconds( );
-                console.log(randomNum % 7);
+                //console.log(randomNum % 7);
                 var botTankLocationArr = this.decideBotTankBirthLocation( randomNum % 7 );
                 var xPosit = botTankLocationArr[0];
                 var yPosit = botTankLocationArr[1];
@@ -105,31 +105,31 @@ var GameLayer = cc.LayerColor.extend({
         var xPosit = 0;
         var yPosit = 0;
         switch( randomNumModSeven ){
-            case randomNumModSeven == 0:
+            case 0:
                 xPosit = 1;
                 yPosit = 12;
                 break;
-            case randomNumModSeven == 1:
+            case 1:
                 xPosit = 10;
                 yPosit = 11;
                 break;
-            case randomNumModSeven == 2:
+            case 2:
                 xPosit = 18;
                 yPosit = 12;
                 break;
-            case randomNumModSeven == 3:
+            case 3:
                 xPosit = 1;
                 yPosit = 6;
                 break;
-            case randomNumModSeven == 4:
+            case 4:
                 xPosit = 18;
                 yPosit = 6;
                 break;
-            case randomNumModSeven == 5:
+            case 5:
                 xPosit = 1;
                 yPosit = 0;
                 break;
-            case randomNumModSeven == 6:
+            case 6:
                 xPosit = 18;
                 yPosit = 0;
                 break;
