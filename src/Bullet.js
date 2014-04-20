@@ -130,7 +130,7 @@ var Bullet = cc.Sprite.extend( {
             
             this.gameLayer.editPoints( -80 );
             
-            this.maze.removeHeart( heart );
+            this.maze.removeHeart( xPosit, yPosit, heart );
             this.gameLayer.pauseBotTanks( 10 );
             
 			//this.gameLayer.gameOver( );

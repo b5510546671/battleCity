@@ -36,7 +36,21 @@ var Maze = cc.Node.extend( {
 			[ ]
 		];
         
-        this.HEART = [];
+        this.HEART = [
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ],
+			[ ]
+		];
 /*		this.MAP = [
 			'#........++........#',
 			'....................',
@@ -57,7 +71,6 @@ var Maze = cc.Node.extend( {
 		for ( var r = 0; r < this.HEIGHT; r++ ){
 			for ( var c = 0; c < this.WIDTH; c++ ){
 				if ( this.MAP[ r ][ c ] == '#' ){
-                    
                     var w = new BreakableWall( );
 					w.setPosition(  new cc.Point( c * 40, ( this.HEIGHT - r - 1 ) * 40 ) );
                     w.setAnchorPoint( new cc.Point( 0, 0 ) );
@@ -75,7 +88,7 @@ var Maze = cc.Node.extend( {
 					var heart = new Heart( );
 					heart.setAnchorPoint( new cc.Point( 0, 0 ) );
 					heart.setPosition( new cc.Point( c * 40, ( this.HEIGHT - r - 1 ) * 40 ) );
-                    this.HEART[ 0 ] = heart;
+                    this.HEART[ r ][ c ] = heart;
 					this.addChild( heart );
 				}
 				
@@ -102,27 +115,24 @@ var Maze = cc.Node.extend( {
 	},
     
     getHeart: function( xPosit, yPosit ){
+        var r = this.HEIGHT - yPosit - 1;
+		var c = xPosit;
         if( this.isHeart( xPosit, yPosit ) ){
-            return this.HEART[ 0 ];
+            return this.HEART[ r ][ c ];
         }
     },
     
-    removeHeart: function( heart ){
-        this.HEART[ 0 ] = null;
+    removeHeart: function( xPosit, yPosit, heart ){
+        var r = this.HEIGHT - yPosit - 1;
+		var c = xPosit;
+        this.HEART[ r ][ c ] = null;
         this.removeChild( heart );
     },
 
 	isHeart: function( xPosit, yPosit ){
-
 		var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
-		//console.log( 'r in getHeart is ' + r + ' c in getHeart is ' + c );
-		if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
-            this.MAP[ r ][ c ] = '.';
-//TODO fix bug here. it happens the same as breakable wall breaks.
-            return this.MAP[ r ][ c ] == '*';
-			//return ( this.HEART[ 0 ] != null );
-		}
+        return this.HEART[ r ][ c ] != null;
 	},
     
     getBreakableWall: function( xPosit, yPosit ){
