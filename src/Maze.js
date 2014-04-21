@@ -132,7 +132,9 @@ var Maze = cc.Node.extend( {
 	isHeart: function( xPosit, yPosit ){
 		var r = this.HEIGHT - yPosit - 1;
 		var c = xPosit;
-        return this.HEART[ r ][ c ] != null;
+        if( 0 <= r && r <= 12 && 0 <= c && c <= 19){
+            return this.HEART[ r ][ c ] != null;
+        }
 	},
     
     getBreakableWall: function( xPosit, yPosit ){
