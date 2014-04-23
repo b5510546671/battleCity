@@ -12,9 +12,8 @@ var BotTank = cc.Sprite.extend( {
         //console.log( this.nextDirection );
 
 		this.pointingDirection = BotTank.DIR.UP;
-
-                
-		this.x = x;
+        
+        this.x = x;
 		this.y = y;
 		this.gameLayer = gameLayer;
 		this.updatePosition( );
@@ -97,39 +96,28 @@ var BotTank = cc.Sprite.extend( {
         if( this.isAtCenter( ) ){
             
 			if( !this.isPossibleToMove( this.nextDirection ) ){
-				this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
-                
+                this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1; 
+				
                 while( true ){
                     if( this.isPossibleToMove( this.nextDirection ) ){
                         break;   
                     }
-                    
-                    this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
-                    
-                }
-                
-                
-                
+                    this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1; 
+                }            
 			}
             
             else{
                 
                 if( this.gameLayer.count % 2 == 0 ){
-                    this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
-                
+                    this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1;
                     while( true ){
                         if( this.isPossibleToMove( this.nextDirection ) ){
                             break;   
                         }
-                    
-                        this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
-                    
+                        this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1; 
                     }   
                 }
-                
-                
             }
-                
                 
             this.setPicture( this.nextDirection );
             this.direction = this.nextDirection;
@@ -237,9 +225,7 @@ var BotTank = cc.Sprite.extend( {
         if( this.isBotAndPlayerInSamePosition( ) ){
             this.gameLayer.gameOver( );   
         }
-        
     },
-
 
 } );
 

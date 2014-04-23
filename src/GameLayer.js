@@ -72,19 +72,13 @@ var GameLayer = cc.LayerColor.extend({
     
     updateScoreLabel: function( ){
         this.scoreLabel.setString( this.score );  
-    },
-    
-//    registerHitCallBack: function( ){
-//        var gameLayer = this;
-//        this.bullet
-//    },
+    },    
     
     createBotTank: function( xPosit, yPosit  ) {
         var btank = new BotTank( xPosit*40 + 20, yPosit*40 + 20, this );
         btank.setMaze( this.maze );
         this.maze.addChild( btank );
         btank.scheduleUpdate( );
-        
         this.botTanks.push( btank );
     },
     
@@ -92,7 +86,6 @@ var GameLayer = cc.LayerColor.extend({
         this.schedule( function( ){
             if( this.count % 5 == 0 ){
                 var randomNum = new Date( ).getMilliseconds( );
-                //console.log(randomNum % 7);
                 var botTankLocationArr = this.decideBotTankBirthLocation( randomNum % 7 );
                 var xPosit = botTankLocationArr[0];
                 var yPosit = botTankLocationArr[1];
@@ -222,19 +215,10 @@ var GameLayer = cc.LayerColor.extend({
     },
     
     shoot: function( x, y, pointingDirection ){
-        //console.log('shoot in GameLayer is done');
         var bullet = new Bullet( x, y, pointingDirection, this.maze, this );
-        
-//        bullet.setHitCallback( function( bullet ) {
-//            this.score -= 20;
-//            
-//        });
-        
         this.scheduleOnce( function( ){
-            //console.log( 'removeChild is called' );
             this.removeChild( bullet );
         }, 2 );
-       
         this.bullets.push(bullet);
         this.addChild( bullet );
         bullet.scheduleUpdate( );
