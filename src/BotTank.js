@@ -8,9 +8,7 @@ var BotTank = cc.Sprite.extend( {
         this.setPicture( this.direction );
 		this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
         this.setPicture( this.nextDirection );
-        //console.log( this.direction );
-        //console.log( this.nextDirection );
-
+        
 		this.pointingDirection = BotTank.DIR.UP;
         
         this.x = x;
@@ -194,7 +192,6 @@ var BotTank = cc.Sprite.extend( {
         if (new Date( ).getTime( ) - this.lastShoot >= 600) {
             this.lastShoot = new Date().getTime();
             
-            //console.log( "FOR TANK " + this.x + " , " + this.y );
             if ( this.isAtCenter( ) ){
               this.gameLayer.shoot( this.x, this.y, this.pointingDirection );
             }

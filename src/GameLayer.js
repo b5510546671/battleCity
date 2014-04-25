@@ -141,7 +141,7 @@ var GameLayer = cc.LayerColor.extend({
         
         for (var i = 0; i < this.bullets.length; i++) {
             for (var j = 0; j < this.botTanks.length; j++) {
-//                if (this.bullets[i].isAtCenter( )) {
+                if (this.bullets[i].isAtCenter( )) {
 //                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
 //                    var bullBlockY = Math.round((this.bullets[i].y - 20 + 40 ) / 40);
 //                    var tankBlockX = Math.round((this.botTanks[j].x - 20 ) / 40);
@@ -164,7 +164,7 @@ var GameLayer = cc.LayerColor.extend({
                             }
                         }
 //                    }
-//                }
+                }
             }
         }
     },

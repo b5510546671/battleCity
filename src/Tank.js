@@ -6,7 +6,6 @@ var Tank = cc.Sprite.extend( {
 
 		this.direction = Tank.DIR.STILL;
 		this.nextDirection = Tank.DIR.STILL;
-
 		this.pointingDirection = Tank.DIR.UP;
 
 		this.x = x;
@@ -142,8 +141,7 @@ var Tank = cc.Sprite.extend( {
 	},
 
 	shoot: function(){
-		//console.log( "FOR TANK " + this.x + " , " + this.y );
-        if ( this.isAtCenter( ) ){
+		if ( this.isAtCenter( ) ){
 		  this.gameLayer.shoot( this.x, this.y, this.pointingDirection );
         }
 	}

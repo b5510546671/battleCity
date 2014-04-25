@@ -110,7 +110,9 @@ var Bullet = cc.Sprite.extend( {
     isPossibleToMove: function( dir ){
 		var nextBlockX = ( this.x - 20 ) / 40;
 		var nextBlockY = ( this.y - 40 - 20 ) / 40;
-		return !( this.checkShootBreakableWall( nextBlockX, nextBlockY ) || this.checkShootHeart( nextBlockX, nextBlockY ) || this.checkShootStaticWall( nextBlockX, nextBlockY ) );
+		return !( this.checkShootBreakableWall( nextBlockX, nextBlockY ) || 
+                 this.checkShootHeart( nextBlockX, nextBlockY ) || 
+                 this.checkShootStaticWall( nextBlockX, nextBlockY ) );
 	},
 } );
 
