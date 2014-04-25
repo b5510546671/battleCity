@@ -137,11 +137,23 @@ var GameLayer = cc.LayerColor.extend({
 //        
 //    },
     
-    update: function() {
+    update: function( ) {
         
-        for (var i = 0; i < this.bullets.length; i++) {
-            for (var j = 0; j < this.botTanks.length; j++) {
-                if (this.bullets[i].isAtCenter( )) {
+        for( var i = 0; i < this.bullets.length; i++ ){
+            for( var j = 0; j < this.botTanks.length; j++ ){
+                if( this.bullets[i].isAtCenter( ) ){
+                    
+                    var bulletBlockX = ( this.bullets[i].x - 20 ) / 40;
+                    var bulletBlockY = ( this.bullets[i].y - 20 ) / 40;
+                    var botTankBlockX = ( this.botTanks[j].x - 20 ) / 40;
+                    var botTankBlockY = ( this.botTanks[j].y - 20 ) / 40;
+
+                    if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
+                        console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
+                        console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
+                        alert( 'shot it' );   
+                        
+                    }
 //                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
 //                    var bullBlockY = Math.round((this.bullets[i].y - 20 + 40 ) / 40);
 //                    var tankBlockX = Math.round((this.botTanks[j].x - 20 ) / 40);
@@ -155,7 +167,7 @@ var GameLayer = cc.LayerColor.extend({
 //                        this.removeElement(this.bullets, this.bullets[i]);
 //                        this.removeElement(this.botTanks, this.botTanks[j]);
 //                    }
-//                    else {
+                    else {
                         if( this.bullets[i].isAtCenter( ) ){
                             if( !this.bullets[i].isPossibleToMove( this.bullets[i].pointingDirection ) ){
                                 //REMOVE THAT BULLET FROM SCREEN
@@ -163,7 +175,7 @@ var GameLayer = cc.LayerColor.extend({
                                 //console.log( 'bullet will be removed from this screen ' );
                             }
                         }
-//                    }
+                    }
                 }
             }
         }
@@ -218,6 +230,7 @@ var GameLayer = cc.LayerColor.extend({
         var bullet = new Bullet( x, y, pointingDirection, this.maze, this );
         this.scheduleOnce( function( ){
             this.removeChild( bullet );
+            this.bullets.shift( );
         }, 2 );
         this.bullets.push(bullet);
         this.addChild( bullet );

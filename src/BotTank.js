@@ -105,7 +105,6 @@ var BotTank = cc.Sprite.extend( {
 			}
             
             else{
-                
                 if( this.gameLayer.count % 2 == 0 ){
                     this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1;
                     while( true ){
