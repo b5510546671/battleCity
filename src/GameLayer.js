@@ -151,7 +151,8 @@ var GameLayer = cc.LayerColor.extend({
                     if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
                         console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
                         console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
-                        alert( 'shot it' );   
+                        alert( 'shot it' ); 
+                        this.editPoints( 100 );
                         
                     }
 //                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
