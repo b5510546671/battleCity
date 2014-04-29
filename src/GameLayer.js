@@ -152,6 +152,7 @@ var GameLayer = cc.LayerColor.extend({
                         console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
                         console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
                         alert( 'shot it' ); 
+                        this.maze.removeChild( this.botTanks[j] );
                         this.editPoints( 100 );
                         
                     }
