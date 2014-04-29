@@ -141,44 +141,57 @@ var GameLayer = cc.LayerColor.extend({
         
         for( var i = 0; i < this.bullets.length; i++ ){
             for( var j = 0; j < this.botTanks.length; j++ ){
-                if( this.bullets[i].isAtCenter( ) ){
-                    
-                    var bulletBlockX = ( this.bullets[i].x - 20 ) / 40;
-                    var bulletBlockY = ( this.bullets[i].y - 20 ) / 40;
-                    var botTankBlockX = ( this.botTanks[j].x - 20 ) / 40;
-                    var botTankBlockY = ( this.botTanks[j].y - 20 ) / 40;
-
-                    if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
-                        console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
-                        console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
-                        console.log( 'shot it' ); 
-                        this.maze.removeChild( this.botTanks[j] );
-                        this.removeChild( this.bullets[i] );
-                        this.editPoints( 100 );
+                
+                
+                try{
+                
+                    if( this.bullets[i].isAtCenter( ) ){
                         
-                    }
-//                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
-//                    var bullBlockY = Math.round((this.bullets[i].y - 20 + 40 ) / 40);
-//                    var tankBlockX = Math.round((this.botTanks[j].x - 20 ) / 40);
-//                    var tankBlockY = Math.round((this.botTanks[j].y - 20 + 40 ) / 40);
-//                    
-//                    
-//                    if (bullBlockX == tankBlockX && bullBlockY == tankBlockY) {
-//                    console.log(bullBlockX + " " + bullBlockY + " " + tankBlockX + " " + tankBlockY);
-//                        this.removeChild(this.bullets[i]);
-//                        this.removeChild(this.botTanks[i]);
-//                        this.removeElement(this.bullets, this.bullets[i]);
-//                        this.removeElement(this.botTanks, this.botTanks[j]);
-//                    }
-                    else {
-                        if( this.bullets[i].isAtCenter( ) ){
-                            if( !this.bullets[i].isPossibleToMove( this.bullets[i].pointingDirection ) ){
-                                //REMOVE THAT BULLET FROM SCREEN
-                                this.removeChild( this.bullets[i] );
-                                //console.log( 'bullet will be removed from this screen ' );
+                        var bulletBlockX = ( this.bullets[i].x - 20 ) / 40;
+                        var bulletBlockY = ( this.bullets[i].y - 20 ) / 40;
+                        var botTankBlockX = ( this.botTanks[j].x - 20 ) / 40;
+                        var botTankBlockY = ( this.botTanks[j].y - 20 ) / 40;
+    
+                        if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
+                           // console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
+                           // console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
+                            //console.log(j);
+                            //console.log( 'shot it' ); 
+                            
+                            this.maze.removeChild( this.botTanks[j] );
+                            this.removeChild( this.bullets[i] );
+                            this.editPoints( 100 );
+                            this.removeElement(this.bullets, this.bullets[i]);
+                            this.removeElement(this.botTanks, this.botTanks[j]);
+                            i = 0;
+                        }
+    //                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
+    //                    var bullBlockY = Math.round((this.bullets[i].y - 20 + 40 ) / 40);
+    //                    var tankBlockX = Math.round((this.botTanks[j].x - 20 ) / 40);
+    //                    var tankBlockY = Math.round((this.botTanks[j].y - 20 + 40 ) / 40);
+    //                    
+    //                    
+    //                    if (bullBlockX == tankBlockX && bullBlockY == tankBlockY) {
+    //                    console.log(bullBlockX + " " + bullBlockY + " " + tankBlockX + " " + tankBlockY);
+    //                        this.removeChild(this.bullets[i]);
+    //                        this.removeChild(this.botTanks[i]);
+    //                        this.removeElement(this.bullets, this.bullets[i]);
+    //                        this.removeElement(this.botTanks, this.botTanks[j]);
+    //                    }
+                        else {
+                            if( this.bullets[i].isAtCenter( ) ){
+                                if( !this.bullets[i].isPossibleToMove( this.bullets[i].pointingDirection ) ){
+                                    //REMOVE THAT BULLET FROM SCREEN
+                                    this.removeChild( this.bullets[i] );
+                                    //console.log( 'bullet will be removed from this screen ' );
+                                }
                             }
                         }
                     }
+                }
+                catch( err ){
+                    console.log(i + ' & ' + this.bullets.length  );
+                    alert( err.message );
                 }
             }
         }
