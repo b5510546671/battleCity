@@ -151,8 +151,9 @@ var GameLayer = cc.LayerColor.extend({
                     if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
                         console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
                         console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
-                        alert( 'shot it' ); 
+                        console.log( 'shot it' ); 
                         this.maze.removeChild( this.botTanks[j] );
+                        this.removeChild( this.bullets[i] );
                         this.editPoints( 100 );
                         
                     }

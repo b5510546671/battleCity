@@ -219,7 +219,7 @@ var BotTank = cc.Sprite.extend( {
     
     checkCollisionWithTank: function( ){
         if( this.isBotAndPlayerInSamePosition( ) ){
-            this.gameLayer.gameOver( );   
+           // this.gameLayer.gameOver( );   
         }
     },
 
