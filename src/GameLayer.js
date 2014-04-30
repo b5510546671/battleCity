@@ -147,12 +147,21 @@ var GameLayer = cc.LayerColor.extend({
                 
                     if( this.bullets[i].isAtCenter( ) ){
                         
+                        var bulletX = this.bullets[i].x;
+                        var bulletY = this.bullets[i].y;
+                        var botBulletX = this.botTanks[j].x;
+                        var botBulletY = this.botTanks[j].x;
+                        
                         var bulletBlockX = ( this.bullets[i].x - 20 ) / 40;
                         var bulletBlockY = ( this.bullets[i].y - 20 ) / 40;
                         var botTankBlockX = ( this.botTanks[j].x - 20 ) / 40;
                         var botTankBlockY = ( this.botTanks[j].y - 20 ) / 40;
-    
-                        if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
+                        
+                        if( bulletX >= botBulletX - 20 && bulletX <= botBulletX + 20 && bulletY >= botBulletY - 20 && bulletY <= botBulletY + 20 ){
+                            
+                        //}
+                        
+                        //if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
                            // console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
                            // console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
                             //console.log(j);
