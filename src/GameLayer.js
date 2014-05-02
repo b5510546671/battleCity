@@ -12,6 +12,8 @@ var GameLayer = cc.LayerColor.extend({
         this.tank.scheduleUpdate( );
         this.maze.addChild( this.tank );
         
+       // this.press = GameLayer.PRESS.UP;
+        
         this.botTanks = [];
         this.bullets = [];
         
@@ -147,35 +149,43 @@ var GameLayer = cc.LayerColor.extend({
                 
                 try{
                 
-                    if( this.bullets[i].isAtCenter( ) ){
+                    if( this.bullets[i].isAtCenter( ) && this.bullets.length > 0 ){
                         
                         var bulletX = this.bullets[i].x;
                         var bulletY = this.bullets[i].y;
-                        var botBulletX = this.botTanks[j].x;
-                        var botBulletY = this.botTanks[j].x;
+                        var botX = this.botTanks[j].x;
+                        var botY = this.botTanks[j].x;
                         
                         var bulletBlockX = ( this.bullets[i].x - 20 ) / 40;
-                        var bulletBlockY = ( this.bullets[i].y - 20 ) / 40;
+                        var bulletBlockY = ( this.bullets[i].y - 20 - 40 ) / 40;
                         var botTankBlockX = ( this.botTanks[j].x - 20 ) / 40;
                         var botTankBlockY = ( this.botTanks[j].y - 20 ) / 40;
                         
-                        if( bulletX >= botBulletX - 20 && bulletX <= botBulletX + 20 && bulletY >= botBulletY - 20 && bulletY <= botBulletY + 20 ){
+                        
+                        //if( bulletX >= botX - 10 && bulletX <= botX + 10 && bulletY >= botY - 10 && bulletY <= botY + 10 ){
                             
                         //}
+                            if( Math.abs(bulletBlockX - botTankBlockX) < 1 && Math.abs(bulletBlockY - botTankBlockY) < 1 ){
+                                
+//                                console.log( '================================================');
+//                                console.log('bullet position ' + bulletBlockX + ' ' + bulletBlockY);
+//                                console.log('bot position ' + botTankBlockX + ' ' + botTankBlockY );
+                                
+                        //        if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
+                               // console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
+                               // console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
+                                //console.log(j);
+                                //console.log( 'shot it' ); 
+                                
+                                    this.maze.removeChild( this.botTanks[j] );
+                                    this.removeChild( this.bullets[i] );
+                                    this.editPoints( 100 );
+                                    this.removeElement(this.bullets, this.bullets[i]);
+                                    this.removeElement(this.botTanks, this.botTanks[j]);
+                                    i = 0;
+                         //       }
+                            }
                         
-                        //if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
-                           // console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
-                           // console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
-                            //console.log(j);
-                            //console.log( 'shot it' ); 
-                            
-                            this.maze.removeChild( this.botTanks[j] );
-                            this.removeChild( this.bullets[i] );
-                            this.editPoints( 100 );
-                            this.removeElement(this.bullets, this.bullets[i]);
-                            this.removeElement(this.botTanks, this.botTanks[j]);
-                            i = 0;
-                        }
     //                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
     //                    var bullBlockY = Math.round((this.bullets[i].y - 20 + 40 ) / 40);
     //                    var tankBlockX = Math.round((this.botTanks[j].x - 20 ) / 40);
@@ -226,6 +236,7 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     onKeyDown: function( e ){
+       
         switch( e ){
             case cc.KEY.left:
                 this.tank.setNextDirection( Tank.DIR.LEFT );
@@ -249,6 +260,7 @@ var GameLayer = cc.LayerColor.extend({
                 }
                 break;
         }
+        
     },
     
     onKeyUp: function( e ){
@@ -299,4 +311,9 @@ var StartScene = cc.Scene.extend({
         this.addChild( layer );
     }
 });
+
+//GameLayer.PRESS = {
+//    UP: 0,
+//    DOWN: 1
+//};
 
