@@ -66,6 +66,8 @@ var GameLayer = cc.LayerColor.extend({
         }, 1 );
         
         this.decideToCreateBotTank( );
+        
+        this.lastFire = new Date( ).getTime( );
 
         return true;
     },
@@ -242,7 +244,9 @@ var GameLayer = cc.LayerColor.extend({
                 this.tank.setPicture( Tank.DIR.DOWN );
                 break;
             case cc.KEY.space:
-                this.tank.shoot();
+                if( new Date( ).getTime( ) - this.lastFire >= 300 ){
+                    this.tank.shoot();
+                }
                 break;
         }
     },
@@ -252,6 +256,7 @@ var GameLayer = cc.LayerColor.extend({
     },
     
     shoot: function( x, y, pointingDirection ){
+        this.lastFire = new Date( ).getTime( );
         var bullet = new Bullet( x, y, pointingDirection, this.maze, this );
         this.scheduleOnce( function( ){
             this.removeChild( bullet );
