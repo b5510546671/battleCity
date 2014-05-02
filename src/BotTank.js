@@ -220,7 +220,7 @@ var BotTank = cc.Sprite.extend( {
     checkCollisionWithTank: function( ){
         if( this.isBotAndPlayerInSamePosition( ) ){
             //TODO when you want to play like in the real game, you must delete the two backslash signs of the below line out first in order to enable the gameover feature.
-            this.gameLayer.gameOver( );   
+         //   this.gameLayer.gameOver( );   
         }
     },
 
