@@ -11,9 +11,7 @@ var GameLayer = cc.LayerColor.extend({
         this.tank.setMaze( this.maze );
         this.tank.scheduleUpdate( );
         this.maze.addChild( this.tank );
-        
-       // this.press = GameLayer.PRESS.UP;
-        
+       
         this.botTanks = [];
         this.bullets = [];
         
@@ -21,26 +19,6 @@ var GameLayer = cc.LayerColor.extend({
         this.createBotTank( 9, 9 );
         this.createBotTank( 1, 10 );
         this.createBotTank( 18, 10 );
-        
-//        ///Initializes three bot tank when game starts
-//        this.btank1 = new BotTank( 9*40 + 20, 9*40 + 20, this );
-//        this.btank1.setMaze( this.maze );
-//        //this.btank1.setNextDirection(BotTank.DIR.UP);
-//        this.btank1.scheduleUpdate( );
-//        this.maze.addChild( this.btank1 );
-//        
-//        this.btank2 = new BotTank( 1*40 + 20, 10*40 + 20, this );
-//        this.btank2.setMaze( this.maze );
-//        //this.btank2.setNextDirection(BotTank.DIR.UP);
-//        this.btank2.scheduleUpdate( );
-//        this.maze.addChild( this.btank2 );
-//        
-//        this.btank3 = new BotTank( 18*40 + 20, 10*40 + 20, this );
-//        this.btank3.setMaze( this.maze );
-//        //this.btank3.setNextDirection(BotTank.DIR.UP);
-//        this.btank3.scheduleUpdate( );
-//        this.maze.addChild( this.btank3 );
-//        ////
         
         this.setKeyboardEnabled( true );
         this.scheduleUpdate();
@@ -134,77 +112,31 @@ var GameLayer = cc.LayerColor.extend({
         return [xPosit, yPosit];
     },
     
-//    checkTanksCollision: function( ){
-//        var playerTankX = this.tank.getPositionX( );
-//        var playerTankY = this.tank.getPositionY( );
-//        
-//        
-//    },
-    
     update: function( ) {
         
         for( var i = 0; i < this.bullets.length; i++ ){
             for( var j = 0; j < this.botTanks.length; j++ ){
-                
-                
+                 
                 try{
-                
-                    if( this.bullets[i].isAtCenter( ) && this.bullets.length > 0 ){
-                        
-                        var bulletX = this.bullets[i].x;
-                        var bulletY = this.bullets[i].y;
-                        var botX = this.botTanks[j].x;
-                        var botY = this.botTanks[j].x;
-                        
+                    if( this.bullets[i].isAtCenter( ) && this.bullets.length > 0 ){    
                         var bulletBlockX = ( this.bullets[i].x - 20 ) / 40;
                         var bulletBlockY = ( this.bullets[i].y - 20 - 40 ) / 40;
                         var botTankBlockX = ( this.botTanks[j].x - 20 ) / 40;
                         var botTankBlockY = ( this.botTanks[j].y - 20 ) / 40;
                         
-                        
-                        //if( bulletX >= botX - 10 && bulletX <= botX + 10 && bulletY >= botY - 10 && bulletY <= botY + 10 ){
-                            
-                        //}
-                            if( Math.abs(bulletBlockX - botTankBlockX) < 1 && Math.abs(bulletBlockY - botTankBlockY) < 1 ){
-                                
-//                                console.log( '================================================');
-//                                console.log('bullet position ' + bulletBlockX + ' ' + bulletBlockY);
-//                                console.log('bot position ' + botTankBlockX + ' ' + botTankBlockY );
-                                
-                        //        if( bulletBlockX == botTankBlockX && bulletBlockY == botTankBlockY ){
-                               // console.log('bulletBlockX = ' + bulletBlockX + ' bulletBlockY = ' + bulletBlockY);
-                               // console.log('botTankBlockX = ' + botTankBlockX + ' botTankBlockY = ' + botTankBlockY);
-                                //console.log(j);
-                                //console.log( 'shot it' ); 
-                                
-                                    this.maze.removeChild( this.botTanks[j] );
-                                    this.removeChild( this.bullets[i] );
-                                    this.editPoints( 100 );
-                                    this.removeElement(this.bullets, this.bullets[i]);
-                                    this.removeElement(this.botTanks, this.botTanks[j]);
-                                    i = 0;
-                         //       }
-                            }
-                        
-    //                    var bullBlockX = Math.round((this.bullets[i].x - 20 ) / 40);
-    //                    var bullBlockY = Math.round((this.bullets[i].y - 20 + 40 ) / 40);
-    //                    var tankBlockX = Math.round((this.botTanks[j].x - 20 ) / 40);
-    //                    var tankBlockY = Math.round((this.botTanks[j].y - 20 + 40 ) / 40);
-    //                    
-    //                    
-    //                    if (bullBlockX == tankBlockX && bullBlockY == tankBlockY) {
-    //                    console.log(bullBlockX + " " + bullBlockY + " " + tankBlockX + " " + tankBlockY);
-    //                        this.removeChild(this.bullets[i]);
-    //                        this.removeChild(this.botTanks[i]);
-    //                        this.removeElement(this.bullets, this.bullets[i]);
-    //                        this.removeElement(this.botTanks, this.botTanks[j]);
-    //                    }
+                        if( Math.abs( bulletBlockX - botTankBlockX ) < 1 && Math.abs( bulletBlockY - botTankBlockY ) < 1 ){
+                            this.maze.removeChild( this.botTanks[j] );
+                            this.removeChild( this.bullets[i] );
+                            this.editPoints( 100 );
+                            this.removeElement( this.bullets, this.bullets[i] );
+                            this.removeElement( this.botTanks, this.botTanks[j] );
+                            i = 0;
+                        }
                         else {
                             if( this.bullets[i].isAtCenter( ) ){
                                 if( !this.bullets[i].isPossibleToMove( this.bullets[i].pointingDirection ) ){
                                     //REMOVE THAT BULLET FROM SCREEN
                                     this.removeChild( this.bullets[i] );
-                                    //console.log( 'bullet will be removed from this screen ' );
                                 }
                             }
                         }
@@ -220,7 +152,7 @@ var GameLayer = cc.LayerColor.extend({
     
     removeElement: function(list, data) {
         var index = list.indexOf(data);
-        if (index > -1) {
+        if ( index > -1 ){
             list.splice(index, 1);
         }
     },
@@ -236,7 +168,6 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     onKeyDown: function( e ){
-       
         switch( e ){
             case cc.KEY.left:
                 this.tank.setNextDirection( Tank.DIR.LEFT );
@@ -256,11 +187,10 @@ var GameLayer = cc.LayerColor.extend({
                 break;
             case cc.KEY.space:
                 if( new Date( ).getTime( ) - this.lastFire >= 300 ){
-                    this.tank.shoot();
+                    this.tank.shoot( );
                 }
                 break;
         }
-        
     },
     
     onKeyUp: function( e ){
@@ -311,9 +241,4 @@ var StartScene = cc.Scene.extend({
         this.addChild( layer );
     }
 });
-
-//GameLayer.PRESS = {
-//    UP: 0,
-//    DOWN: 1
-//};
 

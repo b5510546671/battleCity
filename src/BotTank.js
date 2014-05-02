@@ -69,10 +69,6 @@ var BotTank = cc.Sprite.extend( {
 			this.y = 0;
 		}
 	},
-    
-    okToShoot: function() {
-        
-    },
 
     checkOverBounds: function( ){
 		if( this.getPositionX( ) < 0 ){
@@ -188,8 +184,8 @@ var BotTank = cc.Sprite.extend( {
 	},
 
 	shoot: function( ){
-        if (new Date( ).getTime( ) - this.lastShoot >= 600) {
-            this.lastShoot = new Date().getTime();
+        if ( new Date( ).getTime( ) - this.lastShoot >= 600 ) {
+            this.lastShoot = new Date( ).getTime( );
             
             if ( this.isAtCenter( ) ){
               this.gameLayer.shoot( this.x, this.y, this.pointingDirection );
