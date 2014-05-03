@@ -3,7 +3,6 @@ var GameOverLayer = cc.LayerColor.extend({
     ctor:function ( score ) {
         this._super( );
         
-        
         this.score = score;
         this.init( );
     },
@@ -22,7 +21,6 @@ var GameOverLayer = cc.LayerColor.extend({
         this.scoreLabel = cc.LabelTTF.create( this.score.toString(), 'Arial', 60 );
         this.scoreLabel.setPosition( new cc.Point( 14*40, 6*40 + 20 ) );
         this.addChild( this.scoreLabel );
-        
         
         this.addChild( this.gameOverLabel );
         this.addChild( this.scoreWordLabel );

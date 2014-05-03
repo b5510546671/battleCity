@@ -4,20 +4,19 @@ var Maze = cc.Node.extend( {
 		this.WIDTH = 20;
 		this.HEIGHT = 13;
 		this.MAP = [
-			'#........##........#',
+			'#..................#',
 			'#######......#######',
 		    '#.###.###..###.###.#',
 	        '#.#...#...#..#...#.#',
 	        '#.#.###.####.###.#.#',
-		    '#.#.#..........#.#.#',
-		    '.....###.#.##......',
+		    '#.#.#.....#....#.#.#',
+		    '.....###.#.##.......',
 		    '#.#.#.....#....#.#.#',
 		    '#.#.###.#..#.###.#.#',
-		    '#.#...#..#...#...#.#',
-		    '#.###.##..#.##.###.#',
-		    '....###..###..#.....',
-			'#.#.....#*.#....#..#'
-			
+		    '#.#..##..#...#...#.#',
+		    '#.###*##..#.##.###.#',
+		    '....###..#.#..#.....',
+			'#..................#'
 		];
         
         this.BREAKABLE_WALLS = [
@@ -76,7 +75,6 @@ var Maze = cc.Node.extend( {
                     w.setAnchorPoint( new cc.Point( 0, 0 ) );
                     this.BREAKABLE_WALLS[ r ][ c ] = w;
 					this.addChild( w );
-					
 				}
 				else if ( this.MAP[ r ][ c ] == '+' ){
 					var s = cc.Sprite.create( 'res/images/static_wall.png' );
@@ -91,10 +89,8 @@ var Maze = cc.Node.extend( {
                     this.HEART[ r ][ c ] = heart;
 					this.addChild( heart );
 				}
-				
 			}
 		}
-        
 	},
 
 	isObstacles: function( nextBlockArr ){

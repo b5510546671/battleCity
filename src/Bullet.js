@@ -1,12 +1,14 @@
 var Bullet = cc.Sprite.extend( {
 	ctor: function( x, y, dir, maze, gameLayer ){
         this._super( );
+        
 		this.x = x;
 		this.y = y + 40;
 		this.pointingDirection = dir;
 		this.maze = maze;
 		this.createBullet( this.pointingDirection );
         this.gameLayer = gameLayer;
+        
         this.update();
 	},
     
@@ -35,7 +37,6 @@ var Bullet = cc.Sprite.extend( {
 			default:
 				break;
 		}
-
 	},
 
 	updateBullet: function( ){
@@ -47,20 +48,6 @@ var Bullet = cc.Sprite.extend( {
 	},
 
 	update: function( dt ){
-//		if( this.isAtCenter( ) ){
-//			if( !this.isPossibleToMove( this.pointingDirection ) ){
-//				//REMOVE THAT BULLET FROM SCREEN
-//				this.gameLayer.removeChild( this );
-//				//console.log( 'bullet will be removed from this screen ' );
-//			}
-
-			//var xPosit = ( this.x - 20 ) / 40;
-			//var yPosit = ( this.y - 20 ) / 40;
-
-			//this.checkShootHeart( xPosit, yPosit );
-			//this.checkShootBreakableWall( xPosit, yPosit );
-//		}
-
 		switch( this.pointingDirection ){
 			case Tank.DIR.UP:
 				this.y += Bullet.MOVE_STEP;
@@ -80,9 +67,7 @@ var Bullet = cc.Sprite.extend( {
 	},
 
 	checkShootBreakableWall: function( xPosit, yPosit ){
-		
 		var breakableWall = this.maze.getBreakableWall( xPosit, yPosit );
-
 		if( breakableWall ){
 			this.gameLayer.editPoints( -20 );
             this.maze.removeBreakableWall( xPosit, yPosit, breakableWall );
@@ -111,9 +96,10 @@ var Bullet = cc.Sprite.extend( {
 		var nextBlockX = ( this.x - 20 ) / 40;
 		var nextBlockY = ( this.y - 40 - 20 ) / 40;
 		return !( this.checkShootBreakableWall( nextBlockX, nextBlockY ) || 
-                 this.checkShootHeart( nextBlockX, nextBlockY ) || 
-                 this.checkShootStaticWall( nextBlockX, nextBlockY ) );
+                    this.checkShootHeart( nextBlockX, nextBlockY ) || 
+                    this.checkShootStaticWall( nextBlockX, nextBlockY ) );
 	},
+    
 } );
 
 Bullet.MOVE_STEP = 10;

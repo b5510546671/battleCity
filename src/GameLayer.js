@@ -15,7 +15,6 @@ var GameLayer = cc.LayerColor.extend({
         this.botTanks = [];
         this.bullets = [];
         
-        ////BOT TANK
         this.createBotTank( 9, 9 );
         this.createBotTank( 1, 10 );
         this.createBotTank( 18, 10 );
@@ -112,19 +111,21 @@ var GameLayer = cc.LayerColor.extend({
         return [xPosit, yPosit];
     },
     
-    update: function( ) {
-        
+    isBulletHitBotTank: function( i, j ){
+        var bulletBlockX = ( this.bullets[i].x - 20 ) / 40;
+        var bulletBlockY = ( this.bullets[i].y - 20 - 40 ) / 40;
+        var botTankBlockX = ( this.botTanks[j].x - 20 ) / 40;
+        var botTankBlockY = ( this.botTanks[j].y - 20 ) / 40;
+        return ( Math.abs( bulletBlockX - botTankBlockX ) < 1 && Math.abs( bulletBlockY - botTankBlockY ) < 1 );
+    },
+    
+    checkShootBotTank: function( ){
         for( var i = 0; i < this.bullets.length; i++ ){
             for( var j = 0; j < this.botTanks.length; j++ ){
-                 
                 try{
-                    if( this.bullets[i].isAtCenter( ) && this.bullets.length > 0 ){    
-                        var bulletBlockX = ( this.bullets[i].x - 20 ) / 40;
-                        var bulletBlockY = ( this.bullets[i].y - 20 - 40 ) / 40;
-                        var botTankBlockX = ( this.botTanks[j].x - 20 ) / 40;
-                        var botTankBlockY = ( this.botTanks[j].y - 20 ) / 40;
+                    if( this.bullets[i].isAtCenter( ) && this.bullets.length > 0 ){
                         
-                        if( Math.abs( bulletBlockX - botTankBlockX ) < 1 && Math.abs( bulletBlockY - botTankBlockY ) < 1 ){
+                        if( this.isBulletHitBotTank( i, j ) ){
                             this.maze.removeChild( this.botTanks[j] );
                             this.removeChild( this.bullets[i] );
                             this.editPoints( 100 );
@@ -135,7 +136,6 @@ var GameLayer = cc.LayerColor.extend({
                         else {
                             if( this.bullets[i].isAtCenter( ) ){
                                 if( !this.bullets[i].isPossibleToMove( this.bullets[i].pointingDirection ) ){
-                                    //REMOVE THAT BULLET FROM SCREEN
                                     this.removeChild( this.bullets[i] );
                                 }
                             }
@@ -148,6 +148,10 @@ var GameLayer = cc.LayerColor.extend({
                 }
             }
         }
+    },
+    
+    update: function( ) {
+        this.checkShootBotTank( );        
     },
     
     removeElement: function(list, data) {

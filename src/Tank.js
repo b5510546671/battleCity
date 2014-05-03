@@ -41,7 +41,6 @@ var Tank = cc.Sprite.extend( {
 
 	setDirection: function( dir ){
 		this.direction = dir;
-		
 	},
 
 	setNextDirection: function( dir ){
@@ -60,9 +59,9 @@ var Tank = cc.Sprite.extend( {
 			this.x = 0;
 		}
 		else if( this.getPositionY( ) < 0 ){
-			this.y = 600;
+			this.y = 530;
 		}
-		else if( this.getPositionY( ) > 600 ){
+		else if( this.getPositionY( ) > 530 ){
 			this.y = 0;
 		}
 	},
@@ -72,7 +71,6 @@ var Tank = cc.Sprite.extend( {
 			if( !this.isPossibleToMove( this.nextDirection ) ){
 				this.nextDirection = Tank.DIR.STILL;
 			}
-
 			this.direction = this.nextDirection;
 		}  
     },
@@ -105,7 +103,6 @@ var Tank = cc.Sprite.extend( {
 		this.updatePosition( );
 	},
 
-
 	isAtCenter: function( ){
 		return ( ( this.x + 20 ) % 40 == 0 ) && ( ( this.y + 20 ) % 40 == 0 );
 	},
@@ -128,15 +125,13 @@ var Tank = cc.Sprite.extend( {
                 nextBlockX += 1;
                 break;
         }
-        return [nextBlockX, nextBlockY];
-                
+        return [nextBlockX, nextBlockY];      
     },
 
 	isPossibleToMove: function( dir ){
 		if( dir == Tank.DIR.STILL ){
 			return true;
 		}
-        
 		return !this.maze.isObstacles( this.getNextBlock( dir ) );
 	},
 
@@ -145,7 +140,6 @@ var Tank = cc.Sprite.extend( {
 		  this.gameLayer.shoot( this.x, this.y, this.pointingDirection );
         }
 	}
-
 
 } );
 

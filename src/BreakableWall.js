@@ -3,6 +3,4 @@ var BreakableWall = cc.Sprite.extend( {
 		this._super( );
 		this.initWithFile( 'res/images/wall.png' );
 	}
-
-
 } );

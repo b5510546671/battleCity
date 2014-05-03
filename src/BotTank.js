@@ -3,10 +3,10 @@ var BotTank = cc.Sprite.extend( {
 	ctor: function( x, y, gameLayer ){
 		this._super( );
 		this.initWithFile( 'res/images/bot_tank_up.png' );
-
+        
 		this.direction = BotTank.DIR.UP;
         this.setPicture( this.direction );
-		this.nextDirection = Math.floor( ( ( Math.random() * 100 ) % 4 ) + 1 );
+		this.nextDirection = Math.floor( ( ( Math.random( ) * 100 ) % 4 ) + 1 );
         this.setPicture( this.nextDirection );
         
 		this.pointingDirection = BotTank.DIR.UP;
@@ -44,7 +44,6 @@ var BotTank = cc.Sprite.extend( {
 
 	setDirection: function( dir ){
 		this.direction = dir;
-		
 	},
 
 	setNextDirection: function( dir ){
@@ -63,55 +62,33 @@ var BotTank = cc.Sprite.extend( {
 			this.x = 0;
 		}
 		else if( this.getPositionY( ) < 0 ){
-			this.y = 600;
+			this.y = 530;
 		}
-		else if( this.getPositionY( ) > 600 ){
-			this.y = 0;
-		}
-	},
-
-    checkOverBounds: function( ){
-		if( this.getPositionX( ) < 0 ){
-			this.x = 800;
-		}
-		else if( this.getPositionX( ) > 800 ){
-			this.x = 0;
-		}
-		else if( this.getPositionY( ) < 0 ){
-			this.y = 600;
-		}
-		else if( this.getPositionY( ) > 600 ){
+		else if( this.getPositionY( ) > 530 ){
 			this.y = 0;
 		}
 	},
     
+    findValidMovement: function( ){
+        this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1;
+        while( true ){
+            if( this.isPossibleToMove( this.nextDirection ) ){
+                break;   
+            }
+            this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1; 
+        }
+    },
+    
     prepareToMove: function( ){
-        
         if( this.isAtCenter( ) ){
-            
 			if( !this.isPossibleToMove( this.nextDirection ) ){
-                this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1; 
-				
-                while( true ){
-                    if( this.isPossibleToMove( this.nextDirection ) ){
-                        break;   
-                    }
-                    this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1; 
-                }            
+                this.findValidMovement( );
 			}
-            
             else{
                 if( this.gameLayer.count % 2 == 0 ){
-                    this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1;
-                    while( true ){
-                        if( this.isPossibleToMove( this.nextDirection ) ){
-                            break;   
-                        }
-                        this.nextDirection = ( new Date( ).getMilliseconds( ) % 4 ) + 1; 
-                    }   
+                    this.findValidMovement( );
                 }
-            }
-                
+            } 
             this.setPicture( this.nextDirection );
             this.direction = this.nextDirection;
 		}  
@@ -148,7 +125,6 @@ var BotTank = cc.Sprite.extend( {
         
 	},
 
-
 	isAtCenter: function( ){
 		return ( ( this.x + 20 ) % 40 == 0 ) && ( ( this.y + 20 ) % 40 == 0 );
 	},
@@ -179,7 +155,6 @@ var BotTank = cc.Sprite.extend( {
 		if( dir == Tank.DIR.STILL ){
 			return true;
 		}
-        
 		return !this.maze.isObstacles( this.getNextBlock( dir ) );
 	},
 
