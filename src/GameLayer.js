@@ -65,7 +65,7 @@ var GameLayer = cc.LayerColor.extend({
     
     decideToCreateBotTank: function( ){
         this.schedule( function( ){
-            if( this.count % 5 == 0 ){
+            if( this.count % 5 == 0 || this.botTanks.length == 0 ){
                 var randomNum = new Date( ).getMilliseconds( );
                 var botTankLocationArr = this.decideBotTankBirthLocation( randomNum % 7 );
                 var xPosit = botTankLocationArr[0];
