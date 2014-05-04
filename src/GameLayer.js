@@ -150,8 +150,23 @@ var GameLayer = cc.LayerColor.extend({
         }
     },
     
+    checkWin: function( ){
+        if( this.botTanks.length == 0 ){
+            console.log('you won');
+            this.winner( );
+        }
+    },
+    
+    winner: function( ){
+        var winner = new WinnerLayer( this.score );
+        this.setKeyboardEnabled( false );
+        this.getScheduler( ).unscheduleAllCallbacks( );
+        this.addChild( winner );
+    },
+    
     update: function( ) {
-        this.checkShootBotTank( );        
+        this.checkShootBotTank( );
+        this.checkWin( );
     },
     
     removeElement: function(list, data) {
