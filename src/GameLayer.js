@@ -1,6 +1,6 @@
 var GameLayer = cc.LayerColor.extend({
     init: function( ) {
-        this._super( new cc.Color4B( 127, 127, 127, 255 ) );
+        this._super( new cc.Color4B( 0, 0, 0, 0 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
 
         this.maze = new Maze( );
@@ -47,7 +47,7 @@ var GameLayer = cc.LayerColor.extend({
         this.decideToCreateBotTank( );
         
         this.lastFire = new Date( ).getTime( );
-
+        
         return true;
     },
     
