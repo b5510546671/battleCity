@@ -151,7 +151,7 @@ var GameLayer = cc.LayerColor.extend({
     },
     
     checkWin: function( ){
-        if( this.botTanks.length == 0 ){
+        if( this.botTanks.length == 0 && this.count < 3 ){
             console.log('you won');
             this.winner( );
         }
