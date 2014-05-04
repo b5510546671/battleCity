@@ -147,8 +147,7 @@ var BotTank = cc.Sprite.extend( {
                 nextBlockX += 1;
                 break;
         }
-        return [nextBlockX, nextBlockY];
-                
+        return [nextBlockX, nextBlockY];     
     },
 
 	isPossibleToMove: function( dir ){
@@ -178,19 +177,18 @@ var BotTank = cc.Sprite.extend( {
         return ( botBlockX == bulletBlockX  && botBlockY == bulletBlockY );
         
     },
-    //TODO FIX BUGS when collide. In this case, we check whether the center of bot tank and player equal to each other. But we should check  object as a whole NOT just the center of the object. To do this, we should make the check point larger to be as a whole tank object. Thus, figure out how to do this.
-    isBotAndPlayerInSamePosition: function( ){
+    
+    isBotAndPlayerHitEachOther: function( ){
         var playerTankBlockX = ( this.gameLayer.tank.getPositionX( ) - 20 ) / 40;
         var playerTankBlockY = ( this.gameLayer.tank.getPositionY( ) - 20 ) / 40;
         var botBlockX = ( this.x - 20 ) / 40;
 		var botBlockY = ( this.y - 20 ) / 40;
         
-        return ( botBlockX == playerTankBlockX  && botBlockY == playerTankBlockY );
+        return ( Math.abs( botBlockX - playerTankBlockX ) < 1 && Math.abs( botBlockY - playerTankBlockY ) < 1 );
     },
     
     checkCollisionWithTank: function( ){
-        if( this.isBotAndPlayerInSamePosition( ) ){
-            //TODO when you want to play like in the real game, you must delete the two backslash signs of the below line out first in order to enable the gameover feature.
+        if( this.isBotAndPlayerHitEachOther( ) ){
             this.gameLayer.gameOver( );   
         }
     },
