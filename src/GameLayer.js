@@ -144,7 +144,7 @@ var GameLayer = cc.LayerColor.extend({
                 }
                 catch( err ){
                     console.log(i + ' & ' + this.bullets.length  );
-                    alert( err.message );
+                    //alert( err.message );
                 }
             }
         }

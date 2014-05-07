@@ -134,9 +134,14 @@ var Tank = cc.Sprite.extend( {
 		}
 		return !this.maze.isObstacles( this.getNextBlock( dir ) );
 	},
-
+    
+    playMusic: function(){
+		cc.AudioEngine.getInstance().playMusic("res/sounds/shotgun.mp3");
+	},
+    
 	shoot: function(){
 		if ( this.isAtCenter( ) ){
+          this.playMusic( );
 		  this.gameLayer.shoot( this.x, this.y, this.pointingDirection );
         }
 	}

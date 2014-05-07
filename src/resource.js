@@ -16,4 +16,6 @@ var g_resources = [
 	{src: 'images/bot_tank_down.png'},
 	{src: 'images/bot_tank_left.png'},
 	{src: 'images/bot_tank_right.png'}
+    //sounds
+    {src: 'sounds/shotgun.mp3'}
 ];
