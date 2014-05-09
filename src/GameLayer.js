@@ -23,18 +23,24 @@ var GameLayer = cc.LayerColor.extend({
         this.scheduleUpdate();
         
         this.score = 0;
-        this.scoreLabel = cc.LabelTTF.create( '000', 'Arial', 32 );
+        this.scoreLabel = cc.LabelTTF.create( '000', "Arial", 32 );
         this.scoreLabel.setPosition( new cc.Point( 750, 14 * 40 + 15 ) );
         this.addChild( this.scoreLabel );
         
-        this.scoreWordLabel = cc.LabelTTF.create( 'Score: ', 'Arial', 32 );
+        
+        
+        this.scoreWordLabel = cc.LabelTTF.create( 'Score: ', "Arial", 32 );
         this.scoreWordLabel.setPosition( new cc.Point( 650, 14 * 40 + 15 ) );
         this.addChild( this.scoreWordLabel );
 
         this.count = 100;
-        this.timeLabel = cc.LabelTTF.create( '100', 'Arial', 32 );
-        this.timeLabel.setPosition( new cc.Point( 100, 14 * 40 + 15 ) );
+        this.timeLabel = cc.LabelTTF.create( '100', "Arial", 32 );
+        this.timeLabel.setPosition( new cc.Point( 200, 14 * 40 + 15 ) );
         this.addChild( this.timeLabel );
+        
+        this.timeWordLabel = cc.LabelTTF.create( 'Time Left: ', "Arial", 32 );
+        this.timeWordLabel.setPosition( new cc.Point( 100, 14 * 40 + 15 ) );
+        this.addChild( this.timeWordLabel );
         
         this.schedule( function( ){
             if( this.count == 1 ){
